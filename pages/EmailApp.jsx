@@ -32,7 +32,7 @@ export default class EmailApp extends React.Component {
 
     render() {
         return (
-            <section>
+            <section className="flex space">
                   <SideBar></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
                 <List  emails={this.state.emails}></List> 
