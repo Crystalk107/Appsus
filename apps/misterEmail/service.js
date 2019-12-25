@@ -35,7 +35,7 @@ function getEmails() {
 
 }
 
-function createEmail(subject, body, isRead, sentAt) {
+function createEmail(from, subject, body, isRead, sentAt) {
     return {
         from,
         subject,
