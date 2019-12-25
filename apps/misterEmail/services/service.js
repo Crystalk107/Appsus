@@ -27,6 +27,14 @@ function getEmails(filterBy) {
     
 }
 
+    function toggleStarById(emailId){
+        let modifiedEmails = gEmails.map((email) => 
+        (email.id === emailId) ? ((email.isStarred) ? false : true) : email
+        )
+        storageService.store('emails', modifiedEmails)
+        return Promise.resolve(true)
+    }
+
     function getEmailById(emailId){
         email = gEmails.find((email) => email.Id === emailId);
         return Promise.resolve(email);
