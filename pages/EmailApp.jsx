@@ -34,7 +34,7 @@ export default class EmailApp extends React.Component {
         return (
             <section>
                   <SideBar></SideBar>
-                // {/* <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
+                {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
                 <List  emails={this.state.emails}></List> 
                 // {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>

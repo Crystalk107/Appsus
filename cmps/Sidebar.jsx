@@ -6,7 +6,11 @@ export default class SideBar extends React.Component {
     
         return (
             <ul className="clean-list">
-                <li><Link className="link-style"  to='/'>Home</Link></li>
+                <li><Link className="link-style"  to='/Inbox'></Link></li>
+                <li><Link className="link-style"  to='/Strret'></Link></li>
+                <li><Link className="link-style"  to='/Sent mail'></Link></li>
+                <li><Link className="link-style"  to='/Drafts'></Link></li>
+
             </ul>
         )
     }
