@@ -24,10 +24,22 @@ function createEmails() {
 
 function getEmails(filterBy) {
     if (!filterBy) return Promise.resolve([...gEmail]);
-
+    
 }
 
-    
+    function toggleStarById(emailId){
+        let modifiedEmails = gEmails.map((email) => 
+        (email.id === emailId) ? ((email.isStarred) ? false : true) : email
+        )
+        storageService.store('emails', modifiedEmails)
+        return Promise.resolve(true)
+    }
+
+    function getEmailById(emailId){
+        email = gEmails.find((email) => email.Id === emailId);
+        return Promise.resolve(email);
+    }
+
     function deleteEmail(email) {
         gEmails = gEmails.filter((currEmail) => currEmail.id !== email.id)
         storageService.store('emails', gEmails)
@@ -37,6 +49,7 @@ function getEmails(filterBy) {
     function addEmail(from, subject, body) {
         const newEmail = createEmail(from, subject, body, false, false, new Date().getTime());
         gEmails = [...gEmails, newEmail]
+        storageService.store('sent', newEmail)
         storageService.store('email', gEmails)
     
         return Promise.resolve(newEmail)
