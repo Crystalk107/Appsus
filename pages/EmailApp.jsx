@@ -23,9 +23,9 @@ export default class EmailApp extends React.Component {
 
     }
 
-    onClickStar=(emails)=>{
+    onClickStar=(email)=>{
         
-        console.log(emails.id)
+        service.toggleStarById(email.id)
 
     }
 

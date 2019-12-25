@@ -5,7 +5,6 @@ export default class Preview extends React.Component {
     strClick = (ev) => {
         ev.stopPropagation();
         const { props } = this;
-        console.log('click')
 
 
         props.onClickStar(props.email)

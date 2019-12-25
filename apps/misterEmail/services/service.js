@@ -1,9 +1,9 @@
 
 import storageService from '../../../services/storageService.js'
-import utils, { getRandomID } from './utils.js'
+import utils, { getRandomID, } from './utils.js'
 
-export default {getEmails} 
-let gEmail = storageService.load('emails') || createEmails()
+export default {getEmails,toggleStarById} 
+let gEmails = storageService.load('emails') || createEmails()
 
 function createEmails() {
     const emails = [
@@ -23,13 +23,13 @@ function createEmails() {
 }
 
 function getEmails(filterBy) {
-    if (!filterBy) return Promise.resolve([...gEmail]);
+    if (!filterBy) return Promise.resolve([...gEmails]);
     
 }
 
     function toggleStarById(emailId){
         let modifiedEmails = gEmails.map((email) => 
-        (email.id === emailId) ? ((email.isStarred) ? false : true) : email
+        (email.id === emailId) ? ((email.isStarred) ? email.isStarred = false : email.isStarred = true) : email
         )
         storageService.store('emails', modifiedEmails)
         return Promise.resolve(true)
