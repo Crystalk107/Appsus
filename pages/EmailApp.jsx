@@ -10,33 +10,37 @@ export default class EmailApp extends React.Component {
         filterBy: null,
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.loadEmails();
     }
 
-    
-    loadEmails = () => {
-   
-        service.getEmails(this.state.filterBy).then(emails=>{
-            this.setState({emails})
-        } )
-     
-}
 
-   
+    loadEmails = () => {
+
+        service.getEmails(this.state.filterBy).then(emails => {
+            this.setState({ emails })
+        })
+
+    }
+
+    // strClick=()=>{
+
+    // }
+
+
 
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
-       
+
     // }
 
     render() {
         return (
             <section className="flex space">
-                  <SideBar></SideBar>
+                <SideBar></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                <List  emails={this.state.emails}></List> 
-                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
+                <List emails={this.state.emails}></List>
+                {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )
     }

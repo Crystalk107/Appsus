@@ -1,7 +1,6 @@
 import NavBar from './cmps/Navbar.jsx'
 import Home from '/pages/Home.jsx'
 import Emails from './pages/EmailApp.jsx'
-import strret from './apps/misterEmail/cmps/Strret.jsx'
 
 
 const Router = ReactRouterDOM.HashRouter

@@ -1,6 +1,6 @@
 import Preview from "./Preview.jsx";
 
-export default function BookList(props) {
+export default function list(props) {
 
 
     return <div className="emailList-container">
