@@ -1,0 +1,42 @@
+* > {
+    box-sizing: border-box;
+}
+
+.html{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Navbar */
+
+.navbar{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: rgb(126, 85, 202);
+}
+
+
+/* Helpers */
+
+.clean-list{
+    list-style: none;
+}
+
+.link-style {
+   text-decoration: none;
+   color: white;
+    
+}
+
+.link-style:hover{
+    color: rgb(181, 156, 221);
+}
