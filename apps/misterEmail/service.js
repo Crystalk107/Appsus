@@ -1,22 +1,20 @@
 // import {createMail} from './dataMail.js'
 
 
-let gEmail = []
-
-createEmails()
+let gEmail =     createEmails()
+gEmail = storageService.load('emails') || createEmails()
 function createEmails() {
 
-    gEmail.push(createEmail('Tal', 'Wassap?', 'Pick up!', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Hello?', 'asdasdasd!', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'asd?', 'dfhdfh', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, 1551133930594))
-    gEmail.push(createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, 1551133930594))
-    console.log(gEmail)
+    createEmail('Tal', 'Wassap?', 'Pick up!', false, 1551133930594)
+    createEmail('Tal', 'Hello?', 'asdasdasd!', false, 1551133930594)
+    createEmail('Tal', 'asd?', 'dfhdfh', false, 1551133930594)
+    createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, 1551133930594)
+    createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, 1551133930594)
+    createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, 1551133930594)
+    createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, 1551133930594)
+    createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, 1551133930594)
+    createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, 1551133930594)
+    createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, 1551133930594)
 
 }
 
