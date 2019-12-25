@@ -1,5 +1,6 @@
 import NavBar from './cmps/Navbar.jsx'
 import Home from '/pages/Home.jsx'
+
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
 const { createBrowserHistory } = History
@@ -15,6 +16,8 @@ render() {
                 <NavBar></NavBar>
                 <Switch>
                     <Route component={Home} path="/" exact></Route>
+                    <Route component={EmailApp} path="/EmailApp" exact></Route>
+                    <Route component={EmailDetails} path="/EmailApp/:id" exact></Route>
                 </Switch>
             </Router>
         </main>
