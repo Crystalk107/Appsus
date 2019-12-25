@@ -23,9 +23,11 @@ export default class EmailApp extends React.Component {
 
     }
 
-    // strClick=()=>{
+    onClickStar=(emails)=>{
+        
+        console.log(emails.id)
 
-    // }
+    }
 
 
 
@@ -39,7 +41,7 @@ export default class EmailApp extends React.Component {
             <section className="flex space">
                 <SideBar></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                <List emails={this.state.emails}></List>
+                <List emails={this.state.emails} onClickStar={this.onClickStar}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )

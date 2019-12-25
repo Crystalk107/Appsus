@@ -1,13 +1,18 @@
 const { Link } = ReactRouterDOM
 
 export default class Preview extends React.Component {
-
+  
     strClick = (ev) => {
         ev.stopPropagation();
-        console.log(ev.target.value)
+        const { props } = this;
+        console.log('click')
+
+
+        props.onClickStar(props.email)
+
+    
         // props.strClick(props.email.id)     
     }
-
 
     render() {
         // const props = this.props;
