@@ -1,6 +1,6 @@
-* > {
+/* * > {
     box-sizing: border-box;
-}
+} */
 
 .html{
     width: 100%;
@@ -17,11 +17,25 @@
     position: fixed;
     top: 0;
     left: 0;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0;
     margin: 0;
     width: 100%;
     background-color: rgb(126, 85, 202);
+    min-height: 60px;
+    height: 10%;
+    align-items: center;
+    border-bottom: 3px solid rgb(89, 16, 148);
+
+}
+
+.navbar a{
+    text-align: center;
+    display: block;
+    width: 200px;
+    border: 1px solid black;
+    min-height: 70px;
+
 }
 
 
