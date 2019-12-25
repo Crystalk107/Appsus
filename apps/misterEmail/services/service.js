@@ -27,6 +27,12 @@ function getEmails(filterBy) {
     
 }
 
+    function getStarredEmails(){
+        let starredEmails = gEmails.filter((email) => email.isStarred === true
+        ) 
+        console.log(starredEmails);
+    }
+
     function toggleStarById(emailId){
         // let modifiedEmails = gEmails.map((email) => 
         // (email.id === emailId) ? ((email.isStarred) ? false : true) : email
