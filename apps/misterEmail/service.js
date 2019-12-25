@@ -22,12 +22,14 @@ function createMails(){
 
 function getMiles(){
         if (!filterBy) return [...gMail];
-        return gMail.filter(mail => {  
-            return book.title.includes(filterBy.name)
-                && ((mail.listPrice.amount >= filterBy.priceFrom) || (filterBy.priceFrom === ''))
-                && ((mail.listPrice.amount <= filterBy.priceTo) || (filterBy.priceTo === ''))
+
+        
+        // return gMail.filter(mail => {  
+        //     return book.title.includes(filterBy.name)
+        //         && ((mail.listPrice.amount >= filterBy.priceFrom) || (filterBy.priceFrom === ''))
+        //         && ((mail.listPrice.amount <= filterBy.priceTo) || (filterBy.priceTo === ''))
  
-        })
+        // })
     
     
     
