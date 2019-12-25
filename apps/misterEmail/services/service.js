@@ -1,21 +1,23 @@
 
 import storageService from '../../../services/storageService.js'
+import utils, { getRandomID } from './utils.js'
+
 export default {getEmails} 
 let gEmail = storageService.load('emails') || createEmails()
 
 function createEmails() {
     const emails = [
-    createEmail('Tal', 'Wassap?', 'Pick up!', false, 1551133930594),
-    createEmail('Tal', 'Hello?', 'asdasdasd!', false, 1551133930594),
-    createEmail('Tal', 'asd?', 'dfhdfh', false, 1551133930594),
-    createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, 1551133930594),
-    createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, 1551133930594),
-    createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, 1551133930594),
-    createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, 1551133930594),
-    createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, 1551133930594),
-    createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, 1551133930594),
-    createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, 1551133930594)]
-    storageService.store(emails)
+    createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', false, false, 1551133930594),
+    createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594),
+    createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594),
+    createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594),
+    createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594),
+    createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594),
+    createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594),
+    createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594),
+    createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594),
+    createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594)]
+    storageService.store('emails',emails)
     return emails
 
 }
@@ -23,6 +25,22 @@ function createEmails() {
 function getEmails(filterBy) {
     if (!filterBy) return Promise.resolve([...gEmail]);
 
+}
+
+    
+    function deleteEmail(email) {
+        gEmails = gEmails.filter((currEmail) => currEmail.id !== email.id)
+        storageService.store('emails', gEmails)
+        return Promise.resolve(true)
+    }
+
+    function addEmail(from, subject, body) {
+        const newEmail = createEmail(from, subject, body, false, false, new Date().getTime());
+        gEmails = [...gEmails, newEmail]
+        storageService.store('email', gEmails)
+    
+        return Promise.resolve(newEmail)
+    }
 
     // return gMail.filter(mail => {  
     //     return book.title.includes(filterBy.name)
@@ -32,15 +50,14 @@ function getEmails(filterBy) {
     // })
 
 
-
-}
-
-function createEmail(from, subject, body, isRead, sentAt) {
+function createEmail(from, subject, body, isRead, isStarred, sentAt) {
     return {
+        id: getRandomID(),
         from,
         subject,
         body,
         isRead,
+        isStarred,
         sentAt: new Date(sentAt).toString()
     }
 
