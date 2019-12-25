@@ -2,6 +2,7 @@ import NavBar from './cmps/Navbar.jsx'
 import Home from '/pages/Home.jsx'
 import Emails from './pages/EmailApp.jsx'
 
+
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
 const { createBrowserHistory } = History
