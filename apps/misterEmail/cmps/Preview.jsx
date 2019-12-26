@@ -12,6 +12,11 @@ export default class Preview extends React.Component {
        
     }
 
+    onEmailClick = (ev) => { 
+        const { props } = this;
+        props.onClickPreview(props.email)
+    }
+
     render() {
         // const props = this.props;
         const { props } = this;
@@ -22,8 +27,8 @@ export default class Preview extends React.Component {
 
 
 
-            <Link to={`/EmailApp/${props.email.id}`}>
-                <li className={props.email.isRead ? "read " : "unread "+"clean-list"}>
+            <Link to={`/email/${props.email.id}`}>
+                <li onClick={this.onEmailClick} className={props.email.isRead ? "read " : "unread "+" clean-list"}>
                     <div>
                         <h2>{props.email.sentAt}</h2>
                     </div>

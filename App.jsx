@@ -2,7 +2,7 @@ import NavBar from './cmps/Navbar.jsx'
 import Home from '/pages/Home.jsx'
 import Emails from './pages/EmailApp.jsx'
 import MissKeepApp from './pages/MissKeepApp.jsx'
-
+import EmailsDetails from './apps/misterEmail/pages/DetailsPage.jsx'
 
 
 
@@ -22,7 +22,8 @@ render() {
                 <NavBar></NavBar>
                 <Switch>
                     <Route component={Home} path="/" exact></Route>
-                    <Route component={Emails} path="/email/Inbox" exact></Route>
+                    <Route component={Emails} path="/email" exact></Route>
+                    <Route component={EmailsDetails} path="/email/:id" exact></Route>
 
                     <Route component={MissKeepApp} path="/MissKeepApp" exact></Route>
 

@@ -2,12 +2,20 @@
 import storageService from '../../../services/storageService.js'
 import utils, { getRandomID, } from './utils.js'
 
-export default {getEmails,toggleStarById, getStarredEmails} 
+export default {
+    getEmails,
+    toggleStarById, 
+    getStarredEmails, 
+    getEmailById, 
+    deleteEmail, 
+    getUnreadAmount, 
+    markReadById} 
+
 let gEmails = storageService.load('emails') || createEmails()
 
 function createEmails() {
     const emails = [
-    createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', false, false, 1551133930594),
+    createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594),
     createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594),
     createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594),
     createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594),
@@ -33,15 +41,19 @@ function getStarredEmails(){
     return [...starredEmails]
 }
 
+function markReadById(emailId){
+   
+    let editEmail = gEmails.find(email=>email.id === emailId)
+    editEmail = {...editEmail}
+    editEmail.isRead = true;
+    console.log(editEmail)
+    gEmails = gEmails.map(email=> editEmail.id === email.id ? editEmail : email);
+    storageService.store('emails', gEmails)
+    return Promise.resolve(editEmail)
+}
 
     function toggleStarById(emailId){
 
-
-        // let modifiedEmails = gEmails.map((email) => 
-        // (email.id === emailId) ? ((email.isStarred) ? false : true) : email
-        // )
-        // storageService.store('emails', modifiedEmails)
-        // return Promise.resolve(true)
 
         let editEmail = gEmails.find(email=>email.id === emailId)
 
@@ -56,14 +68,21 @@ function getStarredEmails(){
     }
 
     function getEmailById(emailId){
-        email = gEmails.find((email) => email.Id === emailId);
+        let email = gEmails.find((email) => email.id === emailId);
+        console.log (email)
         return Promise.resolve(email);
     }
 
     function deleteEmail(email) {
+      
         gEmails = gEmails.filter((currEmail) => currEmail.id !== email.id)
         storageService.store('emails', gEmails)
         return Promise.resolve(true)
+    }
+
+    function getUnreadAmount(){
+        let unreadEmails = gEmails.filter((email) => email.isRead === false) 
+        return unreadEmails.length
     }
 
     function addEmail(from, subject, body) {

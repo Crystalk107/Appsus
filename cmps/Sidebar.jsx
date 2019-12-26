@@ -26,7 +26,7 @@ export default class SideBar extends React.Component {
     
         return (
             <ul className="clean-list" >
-                <li className="cat-link inboxCat active" onClick={this.onSelectCategory}>Inbox</li>
+    <li className="cat-link inboxCat active" onClick={this.onSelectCategory}>Inbox {(this.props.unread > 0) && ("(unread "+this.props.unread+")")}</li>
                 <li className="cat-link starredCat" onClick={this.onSelectCategory} >Starred</li>
                 <li className="cat-link sentCat" onClick={this.onSelectCategory}>Sent</li>
             </ul>

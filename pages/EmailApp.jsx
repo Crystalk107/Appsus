@@ -9,7 +9,8 @@ export default class EmailApp extends React.Component {
         emails: [],
         starredEmails: [],
         filterBy: null,
-        isFilterByStar: false
+        isFilterByStar: false,
+        unread: 0
     }
 
     componentDidMount() {
@@ -21,6 +22,7 @@ export default class EmailApp extends React.Component {
         service.getEmails(this.state.filterBy).then(emails => {
             this.setState({ emails })
         })
+        this.setState({unread: service.getUnreadAmount()})
 
     }
 
@@ -30,6 +32,11 @@ export default class EmailApp extends React.Component {
         this.onShowStarred(this.state.isFilterByStar)
       
 
+    }
+
+    onClickPreview = (email) => {
+        service.markReadById(email.id)
+       
     }
 
     onShowStarred = (isFilterByStar) => {
@@ -47,9 +54,9 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space">
-                <SideBar onShowStarred={this.onShowStarred} ></SideBar>
+                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} ></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                <List emails={this.state.emails} onClickStar={this.onClickStar}></List>
+                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )
