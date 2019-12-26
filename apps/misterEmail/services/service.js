@@ -28,11 +28,24 @@ function getEmails(filterBy) {
 }
 
     function toggleStarById(emailId){
-        let modifiedEmails = gEmails.map((email) => 
-        (email.id === emailId) ? ((email.isStarred) ? email.isStarred = false : email.isStarred = true) : email
-        )
-        storageService.store('emails', modifiedEmails)
-        return Promise.resolve(true)
+
+
+        // let modifiedEmails = gEmails.map((email) => 
+        // (email.id === emailId) ? ((email.isStarred) ? false : true) : email
+        // )
+        // storageService.store('emails', modifiedEmails)
+        // return Promise.resolve(true)
+
+        let editEmail = gEmails.find(email=>email.id === emailId)
+
+        editEmail = {...editEmail}
+        editEmail.isStarred = (editEmail.isStarred) ? false : true;
+    
+        gEmails = gEmails.map(email=> editEmail.id === email.id ? editEmail : email);
+    
+        storageService.store('emails', gEmails)
+    
+        return Promise.resolve(editEmail)
     }
 
     function getEmailById(emailId){
