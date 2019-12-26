@@ -1,6 +1,9 @@
 import NavBar from './cmps/Navbar.jsx'
 import Home from '/pages/Home.jsx'
 import Emails from './pages/EmailApp.jsx'
+import MissKeepApp from './pages/MissKeepApp.jsx'
+
+
 
 
 const Router = ReactRouterDOM.HashRouter
@@ -20,6 +23,8 @@ render() {
                     <Route component={Home} path="/" exact></Route>
                     <Route component={Emails} path="/email/Inbox" exact></Route>
                     <Route component={Emails} path="/email/Inbox" exact></Route>
+                    <Route component={MissKeepApp} path="/MissKeepApp" exact></Route>
+
 
                     {/* <Route component={EmailApp} path="/EmailApp" exact></Route>
                     <Route component={EmailDetails} path="/EmailApp/:id" exact></Route> */}

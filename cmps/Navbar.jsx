@@ -5,7 +5,10 @@ export default function NavBar(props) {
             <li><NavLink className="link-style" activeClassName="active" to='/' exact>Home</NavLink></li>
             <li><NavLink  className="link-style" activeClassName="active" to='/email/Inbox'>misterEmail</NavLink></li>
             <li><NavLink className="link-style" activeClassName="active" to='/msBooks'>missBooks</NavLink></li>
-            <li><NavLink className="link-style" activeClassName="active" to='/msKeep'>missKeep</NavLink></li>
+            <li><NavLink className="link-style" activeClassName="active" to='/MissKeepApp'>missKeep</NavLink></li>
+
+
+            
         </ul>
     </nav>
 }

@@ -1,0 +1,17 @@
+.input-container {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+}
+.container-edit{
+    height: 150px;
+}
+.container-edit>*{
+    height: 50px;
+    width: 100px;
+
+
+}
+.container-edit>input{
+    width: 200px;
+}
