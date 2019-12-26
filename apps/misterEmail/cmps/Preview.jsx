@@ -1,21 +1,15 @@
 const { Link } = ReactRouterDOM
 
+
 export default class Preview extends React.Component {
 
     strClick = (ev) => {
         ev.stopPropagation();
         const { props } = this;
-        let star = document.querySelector(`.${props.email.id}`).style.color = "yellow"
-
-
-        // if(star.style.fontcolor() === 'black'){star.style.fontcolor('yellow')}
-        // else star.style.fontcolor('black')
-        console.log(props.email.id)
-
+        let el = document.querySelector(`.${props.email.id}`);
+        el.classList.toggle("checked")
         props.onClickStar(props.email)
-
-
-        // props.strClick(props.email.id)     
+       
     }
 
     render() {
@@ -23,11 +17,13 @@ export default class Preview extends React.Component {
         const { props } = this;
 
         return <React.Fragment>
-            <label className="checkbox-star" className={props.email.id} type="checkbox" htmlFor={props.email.id} onChange={this.strClick}   >★</label>
+            <label className={props.email.id+" checkbox-star"+((props.email.isStarred) ? ' checked' : '')} type="checkbox" htmlFor={props.email.id} onChange={this.strClick}   >★</label>
             <input className="checkbox" type="checkbox" id={props.email.id} onChange={this.strClick} />
 
+
+
             <Link to={`/EmailApp/${props.email.id}`}>
-                <li className={props.email.isRead ? "read clean-list" : "unread clean-list"}>
+                <li className={props.email.isRead ? "read " : "unread "+"clean-list"}>
                     <div>
                         <h2>{props.email.sentAt}</h2>
                     </div>

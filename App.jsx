@@ -6,6 +6,7 @@ import MissKeepApp from './pages/MissKeepApp.jsx'
 
 
 
+
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
 const { createBrowserHistory } = History
@@ -22,10 +23,12 @@ render() {
                 <Switch>
                     <Route component={Home} path="/" exact></Route>
                     <Route component={Emails} path="/email/Inbox" exact></Route>
-                    <Route component={Emails} path="/email/Inbox" exact></Route>
+
                     <Route component={MissKeepApp} path="/MissKeepApp" exact></Route>
 
 
+
+             
                     {/* <Route component={EmailApp} path="/EmailApp" exact></Route>
                     <Route component={EmailDetails} path="/EmailApp/:id" exact></Route> */}
                 </Switch>

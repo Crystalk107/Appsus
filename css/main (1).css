@@ -50,15 +50,6 @@ i {
     padding: 10px;
 }
 
-/* sideBar */
-.cat-link {
-    cursor: pointer;
-}
-
-.active {
-    color: purple;
-}
-
 /* Home */
 
 .homeApps-container {
@@ -74,29 +65,20 @@ i {
     margin: auto;
 }
 
-/* mister Email */
+/* Mister Email */
 
 .checkbox{
 
     visibility: hidden;
     
     }
-
- 
     
-    .checkbox-star{
+.checkbox-star{
+    
         color: black;
         font-size: 50px;
     
-    }
-
-    .checkbox-star::selection{
-        outline:none;
-    }
-
-    .checked{
-        color: yellow;
-        font-size: 50px;
+    
     }
 
 /* Helpers */
