@@ -6,7 +6,7 @@ export default class NoteText extends React.Component {
         console.log(props.note.info)
         return <div className="NoteTx-container">
 
-            <div className="textNot-container">
+            <div className="textNote-container">
                 {props.note.info.txt}
             </div>
 
