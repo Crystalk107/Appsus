@@ -2,7 +2,7 @@
 import storageService from '../../../services/storageService.js'
 import utils, { getRandomID, } from './utils.js'
 
-export default {getEmails,toggleStarById} 
+export default {getEmails,toggleStarById, getStarredEmails} 
 let gEmails = storageService.load('emails') || createEmails()
 
 function createEmails() {
@@ -29,9 +29,8 @@ function getEmails(filterBy) {
 
 
 function getStarredEmails(){
-    let starredEmails = gEmails.filter((email) => email.isStarred === true
-    ) 
-    console.log(starredEmails);
+    let starredEmails = gEmails.filter((email) => email.isStarred === true) 
+    return [...starredEmails]
 }
 
 

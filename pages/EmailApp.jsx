@@ -7,7 +7,9 @@ import SideBar from '../cmps/Sidebar.jsx'
 export default class EmailApp extends React.Component {
     state = {
         emails: [],
+        starredEmails: [],
         filterBy: null,
+        isFilterByStar: false
     }
 
     componentDidMount() {
@@ -16,7 +18,6 @@ export default class EmailApp extends React.Component {
 
 
     loadEmails = () => {
-
         service.getEmails(this.state.filterBy).then(emails => {
             this.setState({ emails })
         })
@@ -26,10 +27,17 @@ export default class EmailApp extends React.Component {
     onClickStar=(email)=>{
         
         service.toggleStarById(email.id)
+        this.onShowStarred(this.state.isFilterByStar)
+      
 
     }
 
-
+    onShowStarred = (isFilterByStar) => {
+  
+        let starredEmails = service.getStarredEmails();
+        (isFilterByStar) ?  this.setState({emails : starredEmails}) : this.loadEmails();
+        this.setState({isFilterByStar});
+    }
 
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
@@ -39,7 +47,7 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space">
-                <SideBar></SideBar>
+                <SideBar onShowStarred={this.onShowStarred} ></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
                 <List emails={this.state.emails} onClickStar={this.onClickStar}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
