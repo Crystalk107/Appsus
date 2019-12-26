@@ -1,7 +1,7 @@
 import storageService from '../../../services/storageService.js'
 import utils, { getRandomID, } from '../../misterEmail/services/utils.js'
-
-export default { getNots }
+import Note from './Note.js'
+export default { getNots, setNoteText }
 
 
 var gNote = createNotes()
@@ -15,8 +15,8 @@ function createNotes() {
         let txt = { txt: "Fullstack Me Baby!" }
 
         note = [
-            createNote('NoteText', true, txt),
-            createNote('NoteText', true, txt)
+            new Note('NoteText', txt),
+            new Note('NoteText', txt)
         ]
     }
     return note
@@ -38,7 +38,14 @@ function createNote(typeNote, isPinned, info) {
 function getNots() {
     return [...gNote]
 }
+function setNoteText(type, info) {
+    let txt = { txt: info }
 
+
+    let note = new Note(type, txt)
+    gNote = [...gNote, note];
+
+}
 
 
 
