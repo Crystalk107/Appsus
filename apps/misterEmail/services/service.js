@@ -10,7 +10,8 @@ export default {
     deleteEmail,
     getUnreadAmount,
     markReadById,
-    toggleReadById
+    toggleReadById,
+    getEmailsReadFilter
 }
 
 let gEmails = storageService.load('emails') || createEmails()
@@ -37,6 +38,17 @@ function getEmails(filterBy) {
 
 }
 
+function getEmailsReadFilter(filterByRead){
+    if (filterByRead === 'read') {
+        let filteredEmails = gEmails.filter((email) => email.isRead === true)
+        return [...filteredEmails]
+    }
+    if (filterByRead === 'unread') {
+        let filteredEmails = gEmails.filter((email) => email.isRead === false)
+        return [...filteredEmails]
+    }
+    if (filterByRead === 'all') return [...gEmails]
+}
 
 function getStarredEmails() {
     let starredEmails = gEmails.filter((email) => email.isStarred === true)

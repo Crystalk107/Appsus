@@ -7,10 +7,10 @@ import SideBar from '../cmps/Sidebar.jsx'
 export default class EmailApp extends React.Component {
     state = {
         emails: [],
-        starredEmails: [],
         filterBy: null,
         isFilterByStar: false,
-        unread: 0
+        unread: 0,
+        readFilter: 'all'
     }
 
     componentDidMount() {
@@ -37,6 +37,14 @@ export default class EmailApp extends React.Component {
     onClickPreview = (email) => {
         service.markReadById(email.id)
        
+       
+    }
+
+    onReadFilter = (filterByRead) => {
+        this.setState({readFilter : filterByRead});
+        let filteredEmails = service.getEmailsReadFilter(filterByRead);
+        this.setState({emails : filteredEmails})
+     
     }
 
     onShowStarred = (isFilterByStar) => {
@@ -53,6 +61,12 @@ export default class EmailApp extends React.Component {
 
     }
 
+    onDelete=(email)=> {
+        service.deleteEmail(email).then(()=>{
+            this.loadEmails()
+        });
+    }
+
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
 
@@ -61,9 +75,9 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space">
-                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} ></SideBar>
+                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onReadFilter={this.onReadFilter}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope}></List>
+                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )

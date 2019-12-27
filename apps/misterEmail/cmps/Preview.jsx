@@ -28,6 +28,11 @@ export default class Preview extends React.Component {
         props.onClickPreview(props.email)
     }
 
+    onDelete = (ev) => {
+        const { props } = this;
+        props.onDelete(props.email)
+    }
+
     render() {
         // const props = this.props;
         const { props } = this;
@@ -42,6 +47,8 @@ export default class Preview extends React.Component {
                 <span className={(props.email.isRead) ? 'hidden' : ''}><i className="fas fa-envelope"></i></span>
                 <span className={(props.email.isRead) ? '' : 'hidden'}><i className="fas fa-envelope-open"></i></span>
             </label>
+        
+            <a  onClick={this.onDelete}><i  className="fas fa-trash"></i></a>
 
 
             <input className="readcheckbox" type="checkbox" id={props.email.id + " readCheckbox-envelope"} onChange={this.envClick} />
