@@ -1,6 +1,7 @@
 import service from '../apps/misterEmail/services/service.js'
 import List from '../apps/misterEmail/cmps/List.jsx'
 import SideBar from '../cmps/Sidebar.jsx'
+import Search from '../apps/misterEmail/cmps/Search.jsx'
 // import BookDetails from '../cmps/books/BookDetails.jsx'
 // import BookFilter from '../cmps/books/BookFilter.jsx'
 
@@ -24,6 +25,10 @@ export default class EmailApp extends React.Component {
         })
         this.setState({unread: service.getUnreadAmount()})
 
+    }
+
+    onSearch = (filterBy) => {
+        this.setState({filterBy}, this.loadEmails)
     }
 
     onClickStar=(email)=>{
@@ -66,7 +71,7 @@ export default class EmailApp extends React.Component {
             this.loadEmails()
         });
     }
-
+ 
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
 
@@ -77,6 +82,7 @@ export default class EmailApp extends React.Component {
             <section className="flex space">
                 <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onReadFilter={this.onReadFilter}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
+                <Search onSearch={this.onSearch} filterBy={this.state.filterBy}></Search>
                 <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>

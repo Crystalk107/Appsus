@@ -34,8 +34,12 @@ function createEmails() {
 }
 
 function getEmails(filterBy) {
-    if (!filterBy) return Promise.resolve([...gEmails]);
+  
+    const emails = (!filterBy) ?  Promise.resolve([...gEmails]) 
+    : gEmails.filter(email => email.subject.toUpperCase().includes(filterBy.text.toUpperCase()) || 
+    email.body.toUpperCase().includes(filterBy.text.toUpperCase()));
 
+    return Promise.resolve(emails) 
 }
 
 function getEmailsReadFilter(filterByRead){
