@@ -76,17 +76,43 @@ i {
 
 /* mister Email */
 
+.hidden {
+    display: none;
+}
 .checkbox{
 
-    visibility: hidden;
+    display: none;
     
     }
 
- 
+    .readcheckbox{
+        
+display: none;
+    }
+
+    .readCheckbox-envelope{
+        color: black;
+        font-size: 50px;
+        cursor: pointer;
+    }
+
+
+
+    .readCheckbox-envelope::selection{
+        outline:none;
+    }
+
+    .envelopeOpen{
+        color: rgb(214, 91, 91);
+        font-size: 50px;  
+      
+    }
+
     
     .checkbox-star{
         color: black;
         font-size: 50px;
+        cursor: pointer;
     
     }
 
@@ -94,7 +120,7 @@ i {
         outline:none;
     }
 
-    .checked{
+    .starchecked{
         color: yellow;
         font-size: 50px;
     }
