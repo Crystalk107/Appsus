@@ -1,6 +1,8 @@
 import NoteText from "../NoteText.jsx";
-
+import NoteImg from "../NoteImg.jsx"
 
 export default {
-    NoteText : NoteText,   
+    NoteText : NoteText,  
+    NoteImg : NoteImg,   
+
 }

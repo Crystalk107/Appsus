@@ -6,6 +6,13 @@ export default class DynamicComponent extends React.Component {
         componentName: 'NoteText'
     }
 
+    
+    componentDidMount() {
+
+        this.setComponent()
+
+
+    }
 
     getComponent() {
 
@@ -15,7 +22,7 @@ export default class DynamicComponent extends React.Component {
 
     setComponent = (ev) => {
         const { props }= this
-        this.setState({ componentName: props.typeNote })
+        this.setState({ componentName: props.note.typeNote })
     }
 
 

@@ -1,3 +1,9 @@
+.body{
+    box-sizing: border-box;
+}
+
+
+
 .input-container {
     width: 100%;
     height: auto;
@@ -24,5 +30,29 @@
     padding: 10px;
     border-radius: 8%;
     border: black 1px solid;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
+
    
+}
+
+.note-container{
+    width: 279px;
+    height: 247px;
+    margin: 10px;
+
+}
+
+.wrap{
+    flex-wrap: wrap;
+
+
+}
+.notes-container{
+    width: 100vw;
+    height: 100vh;
+
+
+}
+.flex{
+    display: flex;
 }
