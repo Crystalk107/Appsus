@@ -6,13 +6,24 @@ export default class Preview extends React.Component {
     strClick = (ev) => {
         ev.stopPropagation();
         const { props } = this;
-        let el = document.querySelector(`.${props.email.id}`);
-        el.classList.toggle("checked")
+        let el = document.querySelector(`.${props.email.id}.checkbox-star`);
+        el.classList.toggle("starchecked")
         props.onClickStar(props.email)
-       
+
     }
 
-    onEmailClick = (ev) => { 
+    envClick = (ev) => {
+
+        ev.stopPropagation();
+        const { props } = this;
+        let el = document.querySelector(`.${props.email.id}.readCheckbox-envelope`);
+        el.classList.toggle("envelopeOpen")
+        props.onClickEnvelope(props.email)
+    }
+
+
+
+    onEmailClick = (ev) => {
         const { props } = this;
         props.onClickPreview(props.email)
     }
@@ -21,14 +32,24 @@ export default class Preview extends React.Component {
         // const props = this.props;
         const { props } = this;
 
+
+
         return <React.Fragment>
-            <label className={props.email.id+" checkbox-star"+((props.email.isStarred) ? ' checked' : '')} type="checkbox" htmlFor={props.email.id} onChange={this.strClick}   >★</label>
-            <input className="checkbox" type="checkbox" id={props.email.id} onChange={this.strClick} />
+            <label className={props.email.id + " checkbox-star" + ((props.email.isStarred) ? ' starchecked' : '')} type="checkbox" htmlFor={props.email.id + " checkbox-star"} onChange={this.strClick}><i className="fas fa-star"></i></label>
+            <input className="checkbox" type="checkbox" id={props.email.id + " checkbox-star"} onChange={this.strClick} />
+
+            <label className={props.email.id + " readCheckbox-envelope" + ((props.email.isRead) ? ' envelopeOpen' : '')} type="checkbox" htmlFor={props.email.id + " readCheckbox-envelope"} onChange={this.envClick}>
+                <span className={(props.email.isRead) ? 'hidden' : ''}><i className="fas fa-envelope"></i></span>
+                <span className={(props.email.isRead) ? '' : 'hidden'}><i className="fas fa-envelope-open"></i></span>
+            </label>
+
+
+            <input className="readcheckbox" type="checkbox" id={props.email.id + " readCheckbox-envelope"} onChange={this.envClick} />
 
 
 
             <Link to={`/email/${props.email.id}`}>
-                <li onClick={this.onEmailClick} className={props.email.isRead ? "read " : "unread "+" clean-list"}>
+                <li onClick={this.onEmailClick} className={props.email.isRead ? "read clean-list" : "unread clean-list"}>
                     <div>
                         <h2>{props.email.sentAt}</h2>
                     </div>
@@ -42,6 +63,10 @@ export default class Preview extends React.Component {
 
                 </li>
             </Link>
+
+
         </React.Fragment >
     }
 }
+
+

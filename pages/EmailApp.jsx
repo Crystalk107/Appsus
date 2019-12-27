@@ -46,6 +46,13 @@ export default class EmailApp extends React.Component {
         this.setState({isFilterByStar});
     }
 
+    onClickEnvelope=(email)=> {
+        service.toggleReadById(email.id)
+        this.loadEmails()
+        
+
+    }
+
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
 
@@ -56,7 +63,7 @@ export default class EmailApp extends React.Component {
             <section className="flex space">
                 <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} ></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview}></List>
+                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )
