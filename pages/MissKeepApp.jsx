@@ -7,7 +7,7 @@ export default class MissKeepApp extends React.Component {
         notes: []
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         this.loadNotes();
 
@@ -15,8 +15,8 @@ export default class MissKeepApp extends React.Component {
     }
 
     loadNotes = () => {
-
-        this.setState({ notes: service.getNots() })
+debugger
+        this.setState({ notes: service.getNots() },(()=>console.log(this.state.notes)))
     }
 
     onCreateTextNote=(typeNote,info)=>{
@@ -43,6 +43,10 @@ export default class MissKeepApp extends React.Component {
 
 
     }
+    onRemove=(noteId)=>{
+        service.removeNote(noteId)
+        this.loadNotes()  
+    }
 
     
 
@@ -50,7 +54,7 @@ export default class MissKeepApp extends React.Component {
         return <div className="container-cmps">
             <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote}
              onCreateVideo={this.onCreateVideo} onCreateToDo={this.onCreateToDo}></NoteAdd>
-            <List notes={this.state.notes}></List>
+            <List notes={this.state.notes} onRemove={this.onRemove}></List>
          
 
         </div>

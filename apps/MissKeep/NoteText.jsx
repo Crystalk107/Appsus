@@ -17,11 +17,17 @@ export default class NoteText extends React.Component {
     checkIfIsToLongTextForContainer = () => {
         const { txt } = this.props.note.info;
         if ((txt) && txt.length > 100) {
-            debugger
             this.setState({ height: 'auto' })
         }
 
 
+    }
+    onRemove = (id) => {
+        const { props } = this
+        props.onRemove(props.note.id)
+
+
+        // props.onRemove(id)
     }
 
 
@@ -30,11 +36,15 @@ export default class NoteText extends React.Component {
 
     render() {
         const { props } = this;
-        return <div className="NoteTx-container">
+        return <div className="NoteTx-container flex">
 
-            <div id={props.note.info.txt}   style={{ height: this.state.height}} className="textNote-container">
+            <div id={props.note.info.txt} style={{ height: this.state.height }} className="textNote-container flex">
                 {props.note.info.txt}
+                <div onClick={this.onRemove} className="editor" >
+                    <i className="far fa-trash-alt fa-1x"></i></div>
+
             </div>
+
 
         </div>
 
