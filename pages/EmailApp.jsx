@@ -163,8 +163,8 @@ export default class EmailApp extends React.Component {
 
     render() {
         return (
-            <section className="flex space" >
-                <SideBar onSelectCompose={this.onSelectCompose} onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox} onSelectSent={this.onSelectSent}></SideBar>
+            <section className="main-container flex">
+                <SideBar  onSelectCompose={this.onSelectCompose} onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox} onSelectSent={this.onSelectSent}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
 
                 <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text} ></List>
