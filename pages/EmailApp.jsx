@@ -1,6 +1,7 @@
 import service from '../apps/misterEmail/services/service.js'
 import List from '../apps/misterEmail/cmps/List.jsx'
 import SideBar from '../cmps/Sidebar.jsx'
+import Search from '../apps/misterEmail/cmps/Search.jsx';
 
 // import BookDetails from '../cmps/books/BookDetails.jsx'
 // import BookFilter from '../cmps/books/BookFilter.jsx'
@@ -8,70 +9,97 @@ import SideBar from '../cmps/Sidebar.jsx'
 export default class EmailApp extends React.Component {
     state = {
         emails: [],
-        filterBy: null,
-        isFilterByStar: false,
+
+        intiate: true,
+        text: null,
+        isStarred: false,
+        sortByName: false,
+        sortByDate: false,
         unread: 0,
         readFilter: 'all'
     }
 
     componentDidMount() {
         this.loadEmails();
+        this.setState({ intiate: false });
     }
 
 
     loadEmails = () => {
-        service.getEmails(this.state.filterBy).then(emails => {
+
+        console.log(this.state.emails)
+        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName).then(emails => {
             this.setState({ emails })
         })
-        this.setState({unread: service.getUnreadAmount()})
+
+
+
+        this.setState({ unread: service.getUnreadAmount() })
 
     }
 
-    onSearch = (filterBy) => {
-        this.setState({filterBy}, this.loadEmails)
+    onSearch = (inputText) => {
+        this.setState(inputText, this.loadEmails)
     }
 
-    onClickStar=(email)=>{
-        
+    onClickStar = (email) => {
+
         service.toggleStarById(email.id)
-        this.onShowStarred(this.state.isFilterByStar)
-      
+        this.loadEmails()
+
+
 
     }
 
     onClickPreview = (email) => {
         service.markReadById(email.id)
-       
-       
+
+
     }
 
     onReadFilter = (filterByRead) => {
-        this.setState({readFilter : filterByRead});
+        this.setState({ readFilter: filterByRead });
         let filteredEmails = service.getEmailsReadFilter(filterByRead);
-        this.setState({emails : filteredEmails})
-     
+        this.setState({ emails: filteredEmails }, this.loadEmails)
+
     }
 
-    onShowStarred = (isFilterByStar) => {
-  
-        let starredEmails = service.getStarredEmails();
-        (isFilterByStar) ?  this.setState({emails : starredEmails}) : this.loadEmails();
-        this.setState({isFilterByStar});
+    onShowStarred = () => {
+        this.setState({ isStarred: true })
+        let starredEmails = service.getStarredEmails(this.state.emails);
+        console.log(starredEmails)
+        this.setState({ emails: starredEmails }, this.loadEmails)
+
+
+
     }
 
-    onClickEnvelope=(email)=> {
+    onSelectInbox = () => {
+        this.setState({ isStarred: false })
+        let allEmails = service.getAllEmails();
+        this.setState({ emails: allEmails }, this.loadEmails)
+
+    }
+
+    onClickEnvelope = (email) => {
         service.toggleReadById(email.id)
         this.loadEmails()
-        
+
 
     }
 
-    onDelete=(email)=> {
-        service.deleteEmail(email).then(()=>{
+    onDelete = (email) => {
+        service.deleteEmail(email).then(() => {
             this.loadEmails()
         });
     }
- 
+
+    onSort = (sortBy) => {
+        
+            this.setState( {sortByName : true} , this.loadEmails)
+    }
+
+
     // onFilter = (filterBy) =>{
     //     this.setState({filterBy} , this.loadBooks);
 
@@ -80,10 +108,10 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space">
-                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onReadFilter={this.onReadFilter}></SideBar>
+                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread}  onSelectInbox={this.onSelectInbox}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
-                
-                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} filterBy={this.state.filterBy}></List>
+
+                <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )

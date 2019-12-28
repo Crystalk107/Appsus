@@ -11,7 +11,10 @@ export default {
     getUnreadAmount,
     markReadById,
     toggleReadById,
-    getEmailsReadFilter
+    getEmailsReadFilter,
+    getAllEmails,
+    sortBy
+    
 }
 
 let gEmails = storageService.load('emails') || createEmails()
@@ -33,16 +36,106 @@ function createEmails() {
 
 }
 
-function getEmails(filterBy) {
-  
-    const emails = (!filterBy) ?  Promise.resolve([...gEmails]) 
-    : gEmails.filter(email => email.subject.toUpperCase().includes(filterBy.text.toUpperCase()) || 
-    email.body.toUpperCase().includes(filterBy.text.toUpperCase()));
-
-    return Promise.resolve(emails) 
+function sortBy(sortBy, currEmails) {
+    if (sortBy) {
+        var copyArray = [...currEmails];
+        var sortByName = copyArray.sort(function (email1, email2) {
+            return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+        })
+    } return [...sortByName]
 }
 
-function getEmailsReadFilter(filterByRead){
+  
+
+function getEmails(readFilter, isStarred, text, sortByName) {
+    let emails = [];
+
+    if ( (text === '' || !text) && !isStarred && readFilter === 'all') emails = [...gEmails] // no filter activated, no search
+
+    if (!!text && text !== '' && !isStarred && readFilter === 'all') // search on all
+    {
+        emails = gEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
+            email.body.toUpperCase().includes(text.toUpperCase()))
+    }
+
+    if ( (text === '' || !text) && isStarred && readFilter === 'all') // all starred emails, no search
+    {
+     
+        emails = getStarredEmails();
+    }
+
+    if (!!text && text !== '' && isStarred && readFilter === 'all') // all starred emails, searching 
+    {
+        let starredEmails = getStarredEmails();
+        emails = starredEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
+            email.body.toUpperCase().includes(text.toUpperCase()))
+    }
+
+    if ((text === '' || !text) && !isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread emails, no search
+    {
+        emails = getEmailsReadFilter(readFilter)
+    }
+
+    if (!!text && text !== '' && !isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread emails, searching
+    {
+        let readOrUnreadEmails = getEmailsReadFilter(readFilter);
+        emails = readOrUnreadEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
+            email.body.toUpperCase().includes(text.toUpperCase()))
+    }
+
+    if (!!text && text !== '' && isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread Starred emails, searching
+    {
+        let starredEmails = getStarredEmails();
+        let filteredEmails;
+        if (readFilter === 'read') {
+           filteredEmails = starredEmails.filter((email) => email.isRead === true)
+        }
+        if (readFilter === 'unread') {
+            filteredEmails = starredEmails.filter((email) => email.isRead === false) 
+        }
+        emails = filteredEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
+        email.body.toUpperCase().includes(text.toUpperCase()))
+
+    }
+
+    if ((text === '' || !text) && isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread Starred emails, no search
+    {
+        let starredEmails = getStarredEmails();
+        if (readFilter === 'read') {
+            emails = starredEmails.filter((email) => email.isRead === true)
+        }
+        if (readFilter === 'unread') {
+             emails = starredEmails.filter((email) => email.isRead === false)
+           
+        } 
+    }
+
+
+
+        if (sortByName) {
+            
+            var sortByName = emails.sort(function (email1, email2) {
+                return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+            })
+            emails = [...sortByName];
+        } 
+        
+
+    return Promise.resolve(emails)
+}
+
+
+
+function getAllEmails() {
+    return [...gEmails]
+}
+
+
+
+
+
+
+function getEmailsReadFilter(filterByRead) {
     if (filterByRead === 'read') {
         let filteredEmails = gEmails.filter((email) => email.isRead === true)
         return [...filteredEmails]
@@ -60,7 +153,7 @@ function getStarredEmails() {
 }
 
 function markReadById(emailId) {
-    
+
     let editEmail = gEmails.find(email => email.id === emailId)
     editEmail = { ...editEmail }
     editEmail.isRead = true;
@@ -71,7 +164,7 @@ function markReadById(emailId) {
 }
 
 function toggleReadById(emailId) {
-  
+
     let editEmail = gEmails.find(email => email.id === emailId)
 
     editEmail = { ...editEmail }
@@ -108,7 +201,7 @@ function deleteEmail(email) {
 
     gEmails = gEmails.filter((currEmail) => currEmail.id !== email.id)
     storageService.store('emails', gEmails)
-    return Promise.resolve(true)
+    return Promise.resolve([...gEmails])
 }
 
 function getUnreadAmount() {
