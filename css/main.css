@@ -39,12 +39,16 @@ i {
     margin: 0;
     width: 100%;
     background-color: rgb(43, 95, 206);
-    border-bottom: 3px groove rgb(16, 100, 148);
-    height: 60px;
+
+    height: 70px;
     align-items: center;
     box-sizing: border-box;
 
 
+}
+
+img.nav-logo{
+    
 }
 
 .nav-link{
@@ -53,6 +57,7 @@ i {
     margin: 10px;
     transition: .3s;
     font-family: Lobster;
+  
 
 }
 
