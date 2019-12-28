@@ -85,6 +85,32 @@ export default class NoteAdd extends React.Component {
             )
 
 
+        } else if (typeNote === 'NoteTodos') {
+
+            (async () => {
+
+                const { value: formValues } = await Swal.fire({
+                    title: 'Img note',
+                    html:
+                        '<input type="text" id="label" class="swal2-input" placeholder="label">' +
+                        '<textarea  rows="10" cols="30" id="ToDoList" class="swal2-input" placeholder="to do list">',
+                    focusConfirm: false,
+                    showCancelButton: true,
+
+                    preConfirm: () => {
+                        return [
+                            document.querySelector('#label').value,
+                            document.querySelector('#ToDoList').value
+                        ]
+                    }
+                })
+
+                if (formValues) {
+                 
+                    props.onCreateToDo(typeNote, formValues)
+                }
+
+            })()
         }
     }
 
@@ -99,6 +125,8 @@ export default class NoteAdd extends React.Component {
                 <button onClick={this.onCreate} value="NoteText">A</button>
                 <button onClick={this.onCreate} value="NoteImg">Img</button>
                 <button onClick={this.onCreate} value="NoteVideo">Video</button>
+                <button onClick={this.onCreate} value="NoteTodos">To-Do</button>
+
 
             </div>
         </div>

@@ -36,12 +36,20 @@ export default class MissKeepApp extends React.Component {
         service.setNoteVideo(typeNote,info)
         this.loadNotes()   
     }
+    onCreateToDo=(typeNote,info)=>{
+        let toDo = info[1].split(',')
+        service.setNoteTodo(typeNote,info[0],toDo)
+        this.loadNotes()   
+
+
+    }
 
     
 
     render() {
         return <div className="container-cmps">
-            <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote} onCreateVideo={this.onCreateVideo}></NoteAdd>
+            <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote}
+             onCreateVideo={this.onCreateVideo} onCreateToDo={this.onCreateToDo}></NoteAdd>
             <List notes={this.state.notes}></List>
          
 
