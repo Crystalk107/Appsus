@@ -51,7 +51,7 @@ export default class DetailsPage extends React.Component {
                 input: "textarea",
                 html:
                     `<input id="email" type="email" class="swal2-input" placeholder="To" value=${this.state.email.from}>` +
-                    `<input id="subject" class="swal2-input" placeholder="Subject" value='Re: "${this.state.email.subject}"'>`,
+                    `<input id="subject" class="swal2-input" placeholder="Subject" value='Re: ${this.state.email.subject}'>`,
 
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
