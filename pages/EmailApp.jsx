@@ -16,7 +16,8 @@ export default class EmailApp extends React.Component {
         sortByName: false,
         sortByDate: false,
         unread: 0,
-        readFilter: 'all'
+        readFilter: 'all',
+        isSent: false
     }
 
     componentDidMount() {
@@ -28,7 +29,7 @@ export default class EmailApp extends React.Component {
     loadEmails = () => {
 
 
-        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName).then(emails => {
+        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName, this.state.isSent).then(emails => {
             this.setState({ emails })
         })
 
@@ -65,6 +66,7 @@ export default class EmailApp extends React.Component {
     }
 
     onShowStarred = () => {
+        this.setState({ isSent: false })
         this.setState({ isStarred: true })
         let starredEmails = service.getStarredEmails(this.state.emails);
         console.log(starredEmails)
@@ -76,6 +78,7 @@ export default class EmailApp extends React.Component {
 
     onSelectInbox = () => {
         this.setState({ isStarred: false })
+        this.setState({ isSent: false })
         let allEmails = service.getAllEmails();
         this.setState({ emails: allEmails }, this.loadEmails)
 
@@ -99,6 +102,15 @@ export default class EmailApp extends React.Component {
         this.setState({ sortByName: true }, this.loadEmails)
     }
 
+    onSelectSent = () =>{
+        this.setState({ isStarred: false })
+        this.setState({ isSent: true })
+        let sentEmails = service.getSentEmails();
+        this.setState({ emails: sentEmails }, this.loadEmails)
+
+
+    }
+
     onSelectCompose = () => {
 
         (async () => {
@@ -107,7 +119,7 @@ export default class EmailApp extends React.Component {
                 title: 'New Message',
                 input: "textarea",
                 html:
-                    '<input id="email" type="email" class="swal2-input" placeholder="To">' +
+                    `<input id="email" type="email" class="swal2-input" placeholder="To">` +
                     '<input id="subject" class="swal2-input" placeholder="Subject">',
 
                 showCancelButton: true,
@@ -125,7 +137,6 @@ export default class EmailApp extends React.Component {
 
             })
             {
-
                 if (formValues) {
                     Swal.fire(
                         'Sent!',
@@ -134,18 +145,11 @@ export default class EmailApp extends React.Component {
                     )
                 }
             }
-
             if (formValues) {
-             
-        
-           service.addEmail(formValues[0], formValues[1], formValues[2])
+                service.addEmail(formValues[0], formValues[1], formValues[2])
                 this.loadEmails()
-
             }
         })()
-
-
-
     }
 
 
@@ -159,7 +163,7 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space" >
-                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox} onSelectCompose={this.onSelectCompose}></SideBar>
+                <SideBar onSelectCompose={this.onSelectCompose} onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox}  onSelectSent={this.onSelectSent}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
 
                 <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text} ></List>

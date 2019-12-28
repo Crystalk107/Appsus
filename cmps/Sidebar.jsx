@@ -12,6 +12,7 @@ export default class SideBar extends React.Component {
     onSelectSent = (ev) => {
         this.resetActives();
         ev.target.classList.add('active');
+        this.props.onSelectSent();
     }
 
     onSelectStarred = (ev) => {
@@ -49,7 +50,7 @@ export default class SideBar extends React.Component {
                 <li className="cat-link composeCat" onClick={this.onSelectCompose} >Compose</li>
                 <li className="cat-link inboxCat active" onClick={this.onSelectInbox}>Inbox {(this.props.unread > 0) && ("(unread " + this.props.unread + ")")}</li>
                 <li className="cat-link starredCat" onClick={this.onSelectStarred} >Starred</li>
-                {/* <li className="cat-link sentCat" onClick={this.onSelectSent}>Sent</li> */}
+                <li className="cat-link sentCat" onClick={this.onSelectSent}>Sent</li>
 
             </ul>
 

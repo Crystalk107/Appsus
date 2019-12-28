@@ -14,7 +14,8 @@ export default {
     getEmailsReadFilter,
     getAllEmails,
     sortBy,
-    addEmail
+    addEmail,
+    getSentEmails
 
     
 }
@@ -25,16 +26,16 @@ let gEmails =  storageService.load('emails') || createEmails();
 
 function createEmails() {
     const emails = [
-        createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594, false),
-        createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594, false),
-        createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594, false),
-        createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594, false)]
+        createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594, false, 'Ben'),
+        createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594, false, 'Ben')]
     storageService.store('emails', emails)
     return emails
 
@@ -51,43 +52,43 @@ function sortBy(sortBy, currEmails) {
 
   
 
-function getEmails(readFilter, isStarred, text, sortByName) {
+function getEmails(readFilter, isStarred, text, sortByName, isSent) {
     let emails = [];
 
-    if ( (text === '' || !text) && !isStarred && readFilter === 'all') emails = [...gEmails] // no filter activated, no search
+    if ( (text === '' || !text) && !isStarred && readFilter === 'all' && !isSent) emails = [...gEmails] // no filter activated, no search
 
-    if (!!text && text !== '' && !isStarred && readFilter === 'all') // search on all
+    if (!!text && text !== '' && !isStarred && readFilter === 'all'  && !isSent) // search on all
     {
         emails = gEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
             email.body.toUpperCase().includes(text.toUpperCase()))
     }
 
-    if ( (text === '' || !text) && isStarred && readFilter === 'all') // all starred emails, no search
+    if ( (text === '' || !text) && isStarred && readFilter === 'all'  && !isSent) // all starred emails, no search
     {
      
         emails = getStarredEmails();
     }
 
-    if (!!text && text !== '' && isStarred && readFilter === 'all') // all starred emails, searching 
+    if (!!text && text !== '' && isStarred && readFilter === 'all'  && !isSent) // all starred emails, searching 
     {
         let starredEmails = getStarredEmails();
         emails = starredEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
             email.body.toUpperCase().includes(text.toUpperCase()))
     }
 
-    if ((text === '' || !text) && !isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread emails, no search
+    if ((text === '' || !text) && !isStarred && (readFilter === 'read' || readFilter ==='unread')  && !isSent) // all read/unread emails, no search
     {
         emails = getEmailsReadFilter(readFilter)
     }
 
-    if (!!text && text !== '' && !isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread emails, searching
+    if (!!text && text !== '' && !isStarred && (readFilter === 'read' || readFilter ==='unread')  && !isSent) // all read/unread emails, searching
     {
         let readOrUnreadEmails = getEmailsReadFilter(readFilter);
         emails = readOrUnreadEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
             email.body.toUpperCase().includes(text.toUpperCase()))
     }
 
-    if (!!text && text !== '' && isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread Starred emails, searching
+    if (!!text && text !== '' && isStarred && (readFilter === 'read' || readFilter ==='unread')  && !isSent) // all read/unread Starred emails, searching
     {
         let starredEmails = getStarredEmails();
         let filteredEmails;
@@ -102,7 +103,7 @@ function getEmails(readFilter, isStarred, text, sortByName) {
 
     }
 
-    if ((text === '' || !text) && isStarred && (readFilter === 'read' || readFilter ==='unread')) // all read/unread Starred emails, no search
+    if ((text === '' || !text) && isStarred && (readFilter === 'read' || readFilter ==='unread')  && !isSent) // all read/unread Starred emails, no search
     {
         let starredEmails = getStarredEmails();
         if (readFilter === 'read') {
@@ -114,6 +115,32 @@ function getEmails(readFilter, isStarred, text, sortByName) {
         } 
     }
 
+    if ( (text === '' || !text) && !isStarred  &&  readFilter === 'all' && isSent) //  no search, sent emails
+    {
+        emails = gEmails.filter((email) => email.isSent === true)
+    }
+
+    if ( !!text && text !== '' && !isStarred  &&  readFilter === 'all' && isSent) //  searching , on all sent emails
+    {
+        let sentEmails = gEmails.filter((email) => email.isSent === true)
+        emails = sentEmails.filter(email => email.subject.toUpperCase().includes(text.toUpperCase()) ||
+        email.body.toUpperCase().includes(text.toUpperCase()))
+    }
+
+
+
+    if ((text === '' || !text) && !isStarred && (readFilter === 'read' || readFilter ==='unread')  && isSent) // all read/unread sent emails, no search, noStarred
+    {
+       
+        let sentEmails = getSentEmails();
+        if (readFilter === 'read') {
+            emails =  sentEmails.filter((email) => email.isRead === true)
+        }
+        if (readFilter === 'unread') {
+             emails =  sentEmails.filter((email) => email.isRead === false)
+           
+        } 
+    }
 
 
         if (sortByName) {
@@ -128,7 +155,10 @@ function getEmails(readFilter, isStarred, text, sortByName) {
     return Promise.resolve(emails)
 }
 
-
+function getSentEmails() {
+    let sentEmails = gEmails.filter((email) => email.isSent === true)
+    return [...sentEmails]
+}
 
 function getAllEmails() {
     
@@ -156,6 +186,8 @@ function getStarredEmails() {
     let starredEmails = gEmails.filter((email) => email.isStarred === true)
     return [...starredEmails]
 }
+
+
 
 function markReadById(emailId) {
 
@@ -214,7 +246,7 @@ function getUnreadAmount() {
 }
 
 function addEmail(to, subject, body) {
-    const newEmail = createEmail(to, subject, body, false, false, new Date().getTime(), true);
+    const newEmail = createEmail(to, subject, body, false, false, new Date().getTime(), true, 'talkabesa@gmail.com');
     gEmails = [newEmail, ...gEmails]
     storageService.store('emails', gEmails)
     return newEmail
@@ -228,7 +260,7 @@ function addEmail(to, subject, body) {
 // })
 
 
-function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent) {
+function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from) {
     return {
         id: getRandomID(),
         to,
@@ -237,7 +269,8 @@ function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent) {
         isRead,
         isStarred,
         sentAt: new Date(sentAt).toString(),
-        isSent
+        isSent,
+        from
     }
 
 }

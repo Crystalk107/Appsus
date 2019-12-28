@@ -55,7 +55,7 @@ export default class Preview extends React.Component {
 
 
 
-            <Link to={`/email/${props.email.id}`}>
+            <Link to={`/email/${props.email.id}`} >
                 <li onClick={this.onEmailClick} className={props.email.isRead ? "read clean-list" : "unread clean-list"}>
                     <div>
                         <h2>{props.email.sentAt}</h2>
