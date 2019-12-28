@@ -1,7 +1,6 @@
 import NoteAdd from '../apps/MissKeep/NoteAdd.jsx'
 import service from '../apps/MissKeep/service/sevice.js'
 import List from '../apps/MissKeep/List.jsx'
-import sevice from '../apps/MissKeep/service/sevice.js';
 export default class MissKeepApp extends React.Component {
 
     state = {
@@ -33,12 +32,16 @@ export default class MissKeepApp extends React.Component {
 
 
     }
+    onCreateVideo=(typeNote,info)=>{
+        service.setNoteVideo(typeNote,info)
+        this.loadNotes()   
+    }
 
     
 
     render() {
         return <div className="container-cmps">
-            <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote}></NoteAdd>
+            <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote} onCreateVideo={this.onCreateVideo}></NoteAdd>
             <List notes={this.state.notes}></List>
          
 

@@ -1,8 +1,6 @@
-.body{
+.body {
     box-sizing: border-box;
 }
-
-
 
 .input-container {
     width: 100%;
@@ -31,28 +29,59 @@
     border-radius: 8%;
     border: black 1px solid;
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
-
-   
+    background-color: rgba(0, 0, 0, 0.156);
+    font-size: 25px;
 }
 
-.note-container{
+/* .note-container{
     width: 279px;
     height: 247px;
     margin: 10px;
 
-}
+} */
 
-.wrap{
+.wrap {
     flex-wrap: wrap;
-
-
 }
-.notes-container{
+
+.notes-container {
     width: 100vw;
     height: 100vh;
-
-
 }
-.flex{
+
+.flex {
     display: flex;
+}
+
+.NoteImg-container {
+    border: 1px solid;
+    border-radius: 0%;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
+    width: 321px;
+    border-radius: 8%;
+    background-color: rgba(0, 0, 0, 0.156);
+}
+
+.note-container {
+    margin-left: 20px;
+}
+
+.img-container {
+    margin-bottom: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.NoteVideo-container {
+    width: 597px;
+    height: 432px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.156);
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
+    border-radius: 8%;
 }

@@ -21,13 +21,7 @@ i {
     color: black;
 }
 
-
-
 /* Navbar */
-
-
-
-
 
 .navbar {
     display: grid;
@@ -51,6 +45,7 @@ i {
 }
 
 /* sideBar */
+
 .cat-link {
     cursor: pointer;
 }
@@ -64,6 +59,10 @@ i {
 .homeApps-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+.center{
+    justify-content: center;
+
 }
 
 .home-container {
@@ -79,51 +78,44 @@ i {
 .hidden {
     display: none;
 }
-.checkbox{
 
+.checkbox {
     display: none;
-    
-    }
+}
 
-    .readcheckbox{
-        
-display: none;
-    }
+.readcheckbox {
+    display: none;
+}
 
-    .readCheckbox-envelope{
-        color: black;
-        font-size: 50px;
-        cursor: pointer;
-    }
+.readCheckbox-envelope {
+    color: black;
+    font-size: 50px;
+    cursor: pointer;
+}
 
+.readCheckbox-envelope::selection {
+    outline: none;
+}
 
+.envelopeOpen {
+    color: rgb(214, 91, 91);
+    font-size: 50px;
+}
 
-    .readCheckbox-envelope::selection{
-        outline:none;
-    }
+.checkbox-star {
+    color: black;
+    font-size: 50px;
+    cursor: pointer;
+}
 
-    .envelopeOpen{
-        color: rgb(214, 91, 91);
-        font-size: 50px;  
-      
-    }
+.checkbox-star::selection {
+    outline: none;
+}
 
-    
-    .checkbox-star{
-        color: black;
-        font-size: 50px;
-        cursor: pointer;
-    
-    }
-
-    .checkbox-star::selection{
-        outline:none;
-    }
-
-    .starchecked{
-        color: yellow;
-        font-size: 50px;
-    }
+.starchecked {
+    color: yellow;
+    font-size: 50px;
+}
 
 /* Helpers */
 

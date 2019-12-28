@@ -1,7 +1,7 @@
 import storageService from '../../../services/storageService.js'
 import utils, { getRandomID, } from '../../misterEmail/services/utils.js'
 import Note from './Note.js'
-export default { getNots, setNoteText, setNoteImg }
+export default { getNots, setNoteText, setNoteImg,setNoteVideo }
 
 
 var gNote = createNotes()
@@ -9,16 +9,15 @@ var gNote = createNotes()
 
 
 function createNotes() {
-    let type = 'NoteText'
     let note
 
 
     note = [
         new Note('NoteText', { txt: "Fullstack Me Baby!" }),
         new Note('NoteImg', { url: "https://www.hashikma-holon.co.il/wp-content/uploads/2019/03/fc438736ea971253df3bc2d4602a9cc0-e1552405265481.jpg", title: 'Adi Himelbloy' }),
-        new Note('NoteText', { txt: "coding academy" })
+        new Note('NoteText', { txt: "coding academy" }),
+        new Note('NoteVideo', { url: "https://www.youtube.com/watch?v=cVjQFX2y0l8"})
     ]
-
     return note
 
 }
@@ -58,7 +57,14 @@ function setNoteImg(type, info) {
     gNote = [...gNote, note];
     console.log(gNote)
 }
+function setNoteVideo(type, info){
 
+    let url = { url: info }
+    let note = new Note(type, url)
+    gNote = [...gNote, note];
+
+
+}
 
 
 // var notes = [

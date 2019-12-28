@@ -64,9 +64,28 @@ export default class NoteAdd extends React.Component {
                 }
 
             })()
+        } else if (typeNote === 'NoteVideo') {
+
+            Swal.fire({
+                title: "Video input!",
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                inputPlaceholder: "youtube url",
+
+
+            }).then((result) => {
+                if (result.value) {
+
+                    props.onCreateVideo(typeNote, (Swal.getInput().value))
+                }
+            }
+            )
+
+
         }
-
-
     }
 
 
@@ -79,8 +98,8 @@ export default class NoteAdd extends React.Component {
             <div className="container-edit">
                 <button onClick={this.onCreate} value="NoteText">A</button>
                 <button onClick={this.onCreate} value="NoteImg">Img</button>
+                <button onClick={this.onCreate} value="NoteVideo">Video</button>
 
-                <button>Video</button>
             </div>
         </div>
     }
