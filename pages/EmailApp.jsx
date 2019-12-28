@@ -27,7 +27,7 @@ export default class EmailApp extends React.Component {
 
     loadEmails = () => {
 
-        console.log(this.state.emails)
+
         service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName).then(emails => {
             this.setState({ emails })
         })
@@ -95,9 +95,60 @@ export default class EmailApp extends React.Component {
     }
 
     onSort = (sortBy) => {
-        
-            this.setState( {sortByName : true} , this.loadEmails)
+
+        this.setState({ sortByName: true }, this.loadEmails)
     }
+
+    onSelectCompose = () => {
+
+        (async () => {
+
+            const { value: formValues } = await Swal.fire({
+                title: 'New Message',
+                input: "textarea",
+                html:
+                    '<input id="email" type="email" class="swal2-input" placeholder="To">' +
+                    '<input id="subject" class="swal2-input" placeholder="Subject">',
+
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Send',
+
+                preConfirm: () => {
+                    return [
+                        document.querySelector('#email').value,
+                        document.querySelector('#subject').value,
+                        Swal.getInput().value
+                    ]
+                }
+
+            })
+            {
+
+                if (formValues) {
+                    Swal.fire(
+                        'Sent!',
+                        'Your email has been sent.',
+                        'success'
+                    )
+                }
+            }
+
+            if (formValues) {
+             
+        
+           service.addEmail(formValues[0], formValues[1], formValues[2])
+                this.loadEmails()
+
+            }
+        })()
+
+
+
+    }
+
+
 
 
     // onFilter = (filterBy) =>{
@@ -107,15 +158,31 @@ export default class EmailApp extends React.Component {
 
     render() {
         return (
-            <section className="flex space">
-                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread}  onSelectInbox={this.onSelectInbox}></SideBar>
+            <section className="flex space" >
+                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox} onSelectCompose={this.onSelectCompose}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
 
-                <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text}></List>
+                <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text} ></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
-            </section>
+            </section >
         )
     }
 
 }
-//
+/* Swal.fire({
+    title: 'Img note',
+    html:
+        '<input id="title" class="swal2-input" placeholder="title">' +
+        '<input id="url" class="swal2-input" placeholder="url">',
+    focusConfirm: false,
+    showCancelButton: true,
+
+    preConfirm: () => {
+        return [
+            document.querySelector('#title').value,
+            document.querySelector('#url').value
+        ]
+    }
+})
+*/
+

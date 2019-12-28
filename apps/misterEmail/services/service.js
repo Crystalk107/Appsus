@@ -13,24 +13,28 @@ export default {
     toggleReadById,
     getEmailsReadFilter,
     getAllEmails,
-    sortBy
+    sortBy,
+    addEmail
+
     
 }
 
-let gEmails = storageService.load('emails') || createEmails()
+let gEmails =  storageService.load('emails') || createEmails();
+
+
 
 function createEmails() {
     const emails = [
-        createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594),
-        createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594),
-        createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594),
-        createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594),
-        createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594),
-        createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594),
-        createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594),
-        createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594),
-        createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594),
-        createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594)]
+        createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594, false),
+        createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594, false),
+        createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594, false),
+        createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594, false)]
     storageService.store('emails', emails)
     return emails
 
@@ -127,6 +131,7 @@ function getEmails(readFilter, isStarred, text, sortByName) {
 
 
 function getAllEmails() {
+    
     return [...gEmails]
 }
 
@@ -157,7 +162,6 @@ function markReadById(emailId) {
     let editEmail = gEmails.find(email => email.id === emailId)
     editEmail = { ...editEmail }
     editEmail.isRead = true;
-    console.log(editEmail)
     gEmails = gEmails.map(email => editEmail.id === email.id ? editEmail : email);
     storageService.store('emails', gEmails)
     return Promise.resolve(editEmail)
@@ -209,13 +213,11 @@ function getUnreadAmount() {
     return unreadEmails.length
 }
 
-function addEmail(from, subject, body) {
-    const newEmail = createEmail(from, subject, body, false, false, new Date().getTime());
-    gEmails = [...gEmails, newEmail]
-    storageService.store('sent', newEmail)
-    storageService.store('email', gEmails)
-
-    return Promise.resolve(newEmail)
+function addEmail(to, subject, body) {
+    const newEmail = createEmail(to, subject, body, false, false, new Date().getTime(), true);
+    gEmails = [newEmail, ...gEmails]
+    storageService.store('emails', gEmails)
+    return newEmail
 }
 
 // return gMail.filter(mail => {  
@@ -226,15 +228,16 @@ function addEmail(from, subject, body) {
 // })
 
 
-function createEmail(from, subject, body, isRead, isStarred, sentAt) {
+function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent) {
     return {
         id: getRandomID(),
-        from,
+        to,
         subject,
         body,
         isRead,
         isStarred,
-        sentAt: new Date(sentAt).toString()
+        sentAt: new Date(sentAt).toString(),
+        isSent
     }
 
 }
