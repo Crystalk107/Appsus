@@ -17,9 +17,7 @@ i {
     height: 30px;
 }
 
-.star {
-    color: black;
-}
+
 
 /* Navbar */
 
@@ -44,15 +42,6 @@ i {
     padding: 10px;
 }
 
-/* sideBar */
-
-.cat-link {
-    cursor: pointer;
-}
-
-.active {
-    color: purple;
-}
 
 /* Home */
 
@@ -73,49 +62,6 @@ i {
     margin: auto;
 }
 
-/* mister Email */
-
-.hidden {
-    display: none;
-}
-
-.checkbox {
-    display: none;
-}
-
-.readcheckbox {
-    display: none;
-}
-
-.readCheckbox-envelope {
-    color: black;
-    font-size: 50px;
-    cursor: pointer;
-}
-
-.readCheckbox-envelope::selection {
-    outline: none;
-}
-
-.envelopeOpen {
-    color: rgb(214, 91, 91);
-    font-size: 50px;
-}
-
-.checkbox-star {
-    color: black;
-    font-size: 50px;
-    cursor: pointer;
-}
-
-.checkbox-star::selection {
-    outline: none;
-}
-
-.starchecked {
-    color: yellow;
-    font-size: 50px;
-}
 
 /* Helpers */
 

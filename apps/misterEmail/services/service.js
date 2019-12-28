@@ -41,6 +41,22 @@ function createEmails() {
 
 }
 
+function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from) {
+    return {
+        id: getRandomID(),
+        to,
+        subject,
+        body,
+        isRead,
+        isStarred,
+        sentAt: new Date(sentAt).toString(),
+        isSent,
+        from
+    }
+
+}
+
+
 function sortBy(sortBy, currEmails) {
     if (sortBy) {
         var copyArray = [...currEmails];
@@ -54,6 +70,7 @@ function sortBy(sortBy, currEmails) {
 
 function getEmails(readFilter, isStarred, text, sortByName, isSent) {
     let emails = [];
+    
 
     if ( (text === '' || !text) && !isStarred && readFilter === 'all' && !isSent) emails = [...gEmails] // no filter activated, no search
 
@@ -260,17 +277,3 @@ function addEmail(to, subject, body) {
 // })
 
 
-function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from) {
-    return {
-        id: getRandomID(),
-        to,
-        subject,
-        body,
-        isRead,
-        isStarred,
-        sentAt: new Date(sentAt).toString(),
-        isSent,
-        from
-    }
-
-}

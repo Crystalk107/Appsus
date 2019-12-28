@@ -1,7 +1,7 @@
 import service from '../apps/misterEmail/services/service.js'
 import List from '../apps/misterEmail/cmps/List.jsx'
 import SideBar from '../cmps/Sidebar.jsx'
-import Search from '../apps/misterEmail/cmps/Search.jsx';
+
 
 // import BookDetails from '../cmps/books/BookDetails.jsx'
 // import BookFilter from '../cmps/books/BookFilter.jsx'
@@ -102,7 +102,7 @@ export default class EmailApp extends React.Component {
         this.setState({ sortByName: true }, this.loadEmails)
     }
 
-    onSelectSent = () =>{
+    onSelectSent = () => {
         this.setState({ isStarred: false })
         this.setState({ isSent: true })
         let sentEmails = service.getSentEmails();
@@ -119,13 +119,14 @@ export default class EmailApp extends React.Component {
                 title: 'New Message',
                 input: "textarea",
                 html:
+                    `<i class="fas fa-envelope-open-text"></i>`+
                     `<input id="email" type="email" class="swal2-input" placeholder="To">` +
                     '<input id="subject" class="swal2-input" placeholder="Subject">',
-
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Send',
+                confirmButtonText: 'Send <i class="fas fa-paper-plane"></i>',
+                cancelButtonText: 'Cancel <i class="fas fa-ban"></i>',
 
                 preConfirm: () => {
                     return [
@@ -163,7 +164,7 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space" >
-                <SideBar onSelectCompose={this.onSelectCompose} onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox}  onSelectSent={this.onSelectSent}></SideBar>
+                <SideBar onSelectCompose={this.onSelectCompose} onShowStarred={this.onShowStarred} unread={this.state.unread} onSelectInbox={this.onSelectInbox} onSelectSent={this.onSelectSent}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
 
                 <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text} ></List>
