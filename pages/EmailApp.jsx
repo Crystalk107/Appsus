@@ -13,7 +13,8 @@ export default class EmailApp extends React.Component {
         intiate: true,
         text: null,
         isStarred: false,
-
+        sortByName: false,
+        sortByDate: false,
         unread: 0,
         readFilter: 'all'
     }
@@ -27,7 +28,7 @@ export default class EmailApp extends React.Component {
     loadEmails = () => {
 
         console.log(this.state.emails)
-        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text).then(emails => {
+        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName).then(emails => {
             this.setState({ emails })
         })
 
@@ -44,7 +45,7 @@ export default class EmailApp extends React.Component {
     onClickStar = (email) => {
 
         service.toggleStarById(email.id)
-        this.loadEmails
+        this.loadEmails()
 
 
 
@@ -82,15 +83,20 @@ export default class EmailApp extends React.Component {
 
     onClickEnvelope = (email) => {
         service.toggleReadById(email.id)
-        this.loadEmails
+        this.loadEmails()
 
 
     }
 
     onDelete = (email) => {
         service.deleteEmail(email).then(() => {
-            this.loadEmails
+            this.loadEmails()
         });
+    }
+
+    onSort = (sortBy) => {
+        
+            this.setState( {sortByName : true} , this.loadEmails)
     }
 
 
@@ -102,10 +108,10 @@ export default class EmailApp extends React.Component {
     render() {
         return (
             <section className="flex space">
-                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread} onReadFilter={this.onReadFilter} onSelectInbox={this.onSelectInbox}></SideBar>
+                <SideBar onShowStarred={this.onShowStarred} unread={this.state.unread}  onSelectInbox={this.onSelectInbox}></SideBar>
                 {/* // <BookFilter onFilter={this.onFilter}  filterBy={this.state.filterBy}></BookFilter> */}
 
-                <List emails={this.state.emails} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text}></List>
+                <List emails={this.state.emails} onSort={this.onSort} onReadFilter={this.onReadFilter} onClickStar={this.onClickStar} onClickPreview={this.onClickPreview} onClickEnvelope={this.onClickEnvelope} onDelete={this.onDelete} onSearch={this.onSearch} text={this.state.text}></List>
                 {/* {this.state.selectedBook && <BookDetails book={this.state.selectedBook} onUnSelectBook={this.onUnSelectBook}></BookDetails>}; */}
             </section>
         )

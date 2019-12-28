@@ -12,7 +12,9 @@ export default {
     markReadById,
     toggleReadById,
     getEmailsReadFilter,
-    getAllEmails
+    getAllEmails,
+    sortBy
+    
 }
 
 let gEmails = storageService.load('emails') || createEmails()
@@ -34,10 +36,21 @@ function createEmails() {
 
 }
 
-function getEmails(readFilter, isStarred, text) {
-    let emails = [];
+function sortBy(sortBy, currEmails) {
+    if (sortBy) {
+        var copyArray = [...currEmails];
+        var sortByName = copyArray.sort(function (email1, email2) {
+            return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+        })
+    } return [...sortByName]
+}
+
   
-    if ( (text === '' || !text) && !isStarred && readFilter === 'all') return Promise.resolve([...gEmails]) // no filter activated, no search
+
+function getEmails(readFilter, isStarred, text, sortByName) {
+    let emails = [];
+
+    if ( (text === '' || !text) && !isStarred && readFilter === 'all') emails = [...gEmails] // no filter activated, no search
 
     if (!!text && text !== '' && !isStarred && readFilter === 'all') // search on all
     {
@@ -99,17 +112,27 @@ function getEmails(readFilter, isStarred, text) {
 
 
 
-    /* 
-               emails = gEmails.filter(email => email.subject.toUpperCase().includes(filterBy.text.toUpperCase()) ||
-                email.body.toUpperCase().includes(filterBy.text.toUpperCase()))
-                */
+        if (sortByName) {
+            
+            var sortByName = emails.sort(function (email1, email2) {
+                return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+            })
+            emails = [...sortByName];
+        } 
+        
 
     return Promise.resolve(emails)
 }
 
+
+
 function getAllEmails() {
     return [...gEmails]
 }
+
+
+
+
 
 
 function getEmailsReadFilter(filterByRead) {
@@ -178,7 +201,7 @@ function deleteEmail(email) {
 
     gEmails = gEmails.filter((currEmail) => currEmail.id !== email.id)
     storageService.store('emails', gEmails)
-    return Promise.resolve(true)
+    return Promise.resolve([...gEmails])
 }
 
 function getUnreadAmount() {
