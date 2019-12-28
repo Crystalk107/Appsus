@@ -1,7 +1,6 @@
 import storageService from '../../../services/storageService.js'
-import utils, { getRandomID, } from '../../misterEmail/services/utils.js'
 import Note from './Note.js'
-export default { getNots, setNoteText, setNoteImg, setNoteVideo, setNoteTodo }
+export default { getNots, setNoteText, setNoteImg, setNoteVideo, setNoteTodo, getNoteById, removeNote }
 
 
 var gNote = storageService.load('note') || createNotes()
@@ -14,11 +13,11 @@ function createNotes() {
 
     note = [
         new Note('NoteText', { txt: "Fullstack Me Baby!" }),
+        new Note('NoteTodos', { todos: [{ txt: 'Finish the task' }, { txt: 'Set the clock at 5 am' }, { txt: 'Simmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm' }], label: 'my todo' }),
         new Note('NoteImg', { url: "https://www.hashikma-holon.co.il/wp-content/uploads/2019/03/fc438736ea971253df3bc2d4602a9cc0-e1552405265481.jpg", title: 'Adi Himelbloy' }),
         new Note('NoteText', { txt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }),
         new Note('NoteVideo', { url: "https://www.youtube.com/watch?v=cVjQFX2y0l8" }),
-        new Note('NoteTodos', {todos:[{txt:'Finish the task'},{txt:'Set the clock at 5 am'},{txt:'Simmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm'}],label:'my todo'})
-        
+
     ]
     storageService.store('note', note)
     return note
@@ -39,7 +38,8 @@ function createNote(typeNote, isPinned, info) {
 }
 
 function getNots() {
-    return [...gNote]
+    let note = [...gNote]
+    return note
 }
 function setNoteText(type, info) {
     let txt = { txt: info }
@@ -81,10 +81,21 @@ function setNoteTodo(type, label, txts) {
 
     });
 
-    
-    let note = new Note(type, {todos:todosArray,label:label})
+
+    let note = new Note(type, { todos: todosArray, label: label })
     gNote = [...gNote, note];
     storageService.store('note', gNote)
+}
+function removeNote(noteid) {
+    let note = gNote.filter(note => (noteid !== note.id))
+    gNote = [...note]
+    console.log(gNote)
+    storageService.store('note', gNote)
+
+}
+function getNoteById(noteid) {
+    const note = gNote.find((note => noteid === note.id))
+    return note
 }
 
 

@@ -1,17 +1,13 @@
 import mapDynamicComponents from "./service/mapDynamicComponents.js"
-
 export default class DynamicComponent extends React.Component {
 
     state = {
-        componentName: 'NoteText'
+        componentName: ''
     }
+  
 
-    
-    componentDidMount() {
-
+    componentWillMount() { 
         this.setComponent()
-
-
     }
 
     getComponent() {
@@ -21,17 +17,19 @@ export default class DynamicComponent extends React.Component {
 
 
     setComponent = (ev) => {
-        const { props }= this
+        debugger
+        const { props } = this
+        console.log(props)
         this.setState({ componentName: props.note.typeNote })
     }
 
 
     render() {
-        const { props }= this
+        const { props } = this
         const Cmp = this.getComponent();
 
         return <React.Fragment>
-            <Cmp note={props.note}></Cmp>
+            <Cmp onRemove={props.onRemove} note={props.note}></Cmp>
         </React.Fragment>
 
     }

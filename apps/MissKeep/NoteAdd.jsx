@@ -24,6 +24,7 @@ export default class NoteAdd extends React.Component {
             Swal.fire({
                 title: "An input!",
                 text: "Write something:",
+                // inputValue: 'input value',
                 input: 'textarea',
                 inputAttributes: {
                     autocapitalize: 'off'

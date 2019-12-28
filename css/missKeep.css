@@ -31,6 +31,8 @@
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
     background-color: rgba(0, 0, 0, 0.156);
     font-size: 25px;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* .note-container{
@@ -103,4 +105,10 @@
 
 .underLine {
     text-decoration: underline;
+}
+.editor{
+    height: 40px;
+    margin: 0;
+    border-radius: 8%;
+
 }
