@@ -5,9 +5,9 @@ export default class Home extends React.Component {
             <section className="home-container">
                 <h1>Appsus - Homepage</h1>
                 <ul className="homeApps-container clean-list">
-                    <li>misterEmail</li>
-                    <li>missKeep</li>
-                    <li>missBook</li>
+                    <li>misterEmail<img src="../img/emailLogo.png"></img></li>
+                    <li>missKeep<img src="../img/noteLogo.png"></img></li>
+                    <li>missBook<img src="../img/booksLogo.png"></img></li>
                 </ul>
             </section>
         )

@@ -110,10 +110,25 @@ i {
 
 }
 
+.home-container h1{
+    padding: 0;
+    margin: 0;
+    
+}
+
+.homeApps-container li{
+    display: flex;
+    flex-direction: column;
+}
+
+.homeApps-container li img{
+    height: 200px;
+    width: 200px;
+}
 .home-container {
     text-align: center;
     width: 70%;
-    
+    height: calc(100vh - 90px);
     background-color: rgb(219, 215, 215);
     justify-content: center;
     margin: auto;
