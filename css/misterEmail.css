@@ -114,36 +114,75 @@
     display: none;
 }
 
+.mailOptions-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(216, 205, 205);
+    border-radius: 10px;
+    
+}
+
 .readCheckbox-envelope {
-    color: black;
-    font-size: 50px;
+    color: rgb(218, 146, 146);
+    font-size: 1.3rem;
     cursor: pointer;
+    transition: .3s;
+}
+
+.envelopeOpen {
+    color: rgb(214, 91, 91);
+    font-size: 1.3rem;
+    transition: .3s;
+}
+
+.envelopeOpen:hover{
+    font-size: 1.5rem;
+}
+
+.readCheckbox-envelope:hover{
+    font-size: 1.5rem;
 }
 
 .readCheckbox-envelope::selection {
     outline: none;
 }
 
-.envelopeOpen {
-    color: rgb(214, 91, 91);
-    font-size: 50px;
-}
+
 
 .checkbox-star {
+   
     color: black;
-    font-size: 50px;
+    font-size: 1.3rem;
     cursor: pointer;
+    transition: .3s;
 }
 
 .checkbox-star::selection {
     outline: none;
 }
 
-.starchecked {
-    color: yellow;
-    font-size: 50px;
+.checkbox-star:hover {
+    font-size: 1.7rem  
 }
 
+.starchecked {
+    color: rgb(212, 195, 41);
+    font-size: 1.3rem;
+}
+
+.fa-trash {
+    cursor: pointer;
+    transition: .4s;
+}
+
+.fa-trash:hover {
+    font-size: 1.35rem
+}
 
 
 /* inner content containers */
@@ -158,15 +197,18 @@
         width: 100vw;
         display: flex;
         flex-direction: column;
+        font-family: Ubuntu-regular;
     }
 
     /* search and email list */
 
     .emailList-container{
         width: 100%;
-        display: flex;
+        display: grid;
         flex-direction: column;
         justify-content: flex-start;
+      
+     
 
     }
 
@@ -174,7 +216,11 @@
        display: flex;
        justify-content: center;
        margin: 50px;
+       flex-direction: column;
+       align-items: center;
     }
+
+   
 
 
     .emailList-container li{
@@ -182,5 +228,141 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        color: black;
+          
+        
 
+    }
+
+    .preview-container {
+       
+        font-size: 1rem;
+        border-bottom: 1px solid gray;
+        display: grid;
+        grid-template-columns: 80px 70px 1fr;
+        grid-gap: 15px;
+      
+    
+    }
+
+    .preview-container.unread{
+        font-family: Ubuntu-bold;
+        
+    }
+
+    .preview-container.read{
+        background-color: rgb(235, 226, 226);
+       
+    }
+
+    .mailOptions-container{
+        display: grid;
+        grid-column: 1 / 2;
+    }
+    .from-container {
+        width: 300px;
+        grid-column: 3 / 4;
+    }
+
+    .previewText-container {
+        flex-direction: flex-start;
+
+        
+    }
+
+    .relativeTime-container {
+        flex-direction: flex-end;
+     
+       
+    }
+
+    a li.textDetails { 
+       display: flex;
+       justify-content: space-between;
+       text-align: left;
+    }
+
+    /* a li.textDetails div{
+        
+    } */
+
+    .emailStar-container {
+        display: flex;
+        align-items: center;
+        grid-column: 2 / 3;
+    }
+
+
+
+    /* Search Bar */
+
+    .searchBox {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 5px;
+        background: #2764b9;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
+        
+    
+    }
+
+    ::placeholder{
+        color: rgb(223, 217, 217);
+    }
+    
+    .searchBox:hover > .searchInput {
+        width: 240px;
+        padding: 0 6px;
+    }
+    
+    .searchBox:hover > .searchButton {
+      background: white;
+      color : #2764b9;
+    }
+    
+    .searchButton {
+        color: white;
+        float: right;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2764b9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+    }
+    
+    .searchInput {
+        border:none;
+        background: none;
+        outline:none;
+        float:left;
+        padding: 0;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 0px;
+    
+    }
+    
+    @media screen and (max-width: 620px) {
+    .searchBox:hover > .searchInput {
+        width: 150px;
+        padding: 0 6px;
+    }
+    }
+
+    /* Filter Dropdown */
+
+    
+
+    /* Details Page */
+
+    .details-container {
+        white-space: pre-wrap;
     }

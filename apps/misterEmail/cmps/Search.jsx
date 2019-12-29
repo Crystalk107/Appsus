@@ -37,9 +37,13 @@ export default class Search extends React.Component {
 
     render() {
         return <div className="search-container">
-            <input type="text" placeholder="Search within emails..." value={this.state.text}
+            <div className="searchBox">
+            <input className="searchInput" type="text" placeholder="Search within emails..." value={this.state.text}
                 onChange={this.changeInput} name="text"></input>
-
+                           <button class="searchButton" href="#">
+                           <i class="fas fa-search"></i>
+            </button>
+</div>
 
             <select className="readFilterSelector" onChange={this.onFilterChoice}>
                 <option className="readFilterSelector" value="all">All</option>
@@ -49,8 +53,8 @@ export default class Search extends React.Component {
 
             <div>
                 <span>Sort By: </span>
-                <button  value="name" onClick={this.onSortEmails}>Name </button>
-                <button   value="date" onClick={this.onSortEmails} >Date</button>
+                <button  className="sortButton" value="name" onClick={this.onSortEmails}>Name </button>
+                <button   className="sortButton" value="date" onClick={this.onSortEmails} >Date</button>
         </div >
 
         </div >

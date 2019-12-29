@@ -13,6 +13,16 @@
     src: url('../fonts/Corben/Corben-Bold.ttf');
 }
 
+@font-face {
+    font-family: Ubuntu-regular;
+    src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-bold;
+    src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
 *> {
     box-sizing: border-box;
 }

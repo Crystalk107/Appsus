@@ -41,7 +41,9 @@ export default class Preview extends React.Component {
 
         return <React.Fragment>
 
-     
+     <div className={props.email.isRead ? "preview-container read" : "preview-container unread"}>
+
+         <div className="mailOptions-container">
             <label className={props.email.id + " readCheckbox-envelope" + ((props.email.isRead) ? ' envelopeOpen' : '')} type="checkbox" htmlFor={props.email.id + " readCheckbox-envelope"} onChange={this.envClick}>
                 <span className={(props.email.isRead) ? 'hidden' : ''}><i className="fas fa-envelope"></i></span>
                 <span className={(props.email.isRead) ? '' : 'hidden'}><i className="fas fa-envelope-open"></i></span>
@@ -50,26 +52,26 @@ export default class Preview extends React.Component {
         
             <a  onClick={this.onDelete}><i  className="fas fa-trash"></i></a>
 
-         
+            </div>
 
-
-
-            <Link to={`/email/${props.email.id}`} >
-                
-                <li onClick={this.onEmailClick} className={props.email.isRead ? "read clean-list" : "unread clean-list"}>
-                    <div>
+            <div className="emailStar-container">
                     <label className={props.email.id + " checkbox-star" + ((props.email.isStarred) ? ' starchecked' : '')} type="checkbox" htmlFor={props.email.id + " checkbox-star"} onChange={this.strClick}><i className="fas fa-star"></i></label>
             <input className="checkbox" type="checkbox" id={props.email.id + " checkbox-star"} onChange={this.strClick} />
 
                     </div>
-                    <div>
-                        <h2>{props.email.from}</h2>
+
+            <Link to={`/email/${props.email.id}`} >
+                
+                <li onClick={this.onEmailClick} className={props.email.isRead ? "read clean-list textDetails" : "unread clean-list textDetails"}>
+       
+                    <div className="from-container">
+                        {props.email.from}
                     </div>
-                    <div>
-                        <h2>{props.email.subject} - {props.email.body.substring(0, 80 - props.email.subject.length)}...</h2>
+                    <div className="previewText-container">
+                        {props.email.subject} - {props.email.body.substring(0, 60 - props.email.subject.length)}...
                     </div>
-                    <div>
-                        <h2>{props.email.sentAt}</h2>
+                    <div className="relativeTime-container">
+                       {props.email.sentAt}
                     </div>
 
 
@@ -77,7 +79,7 @@ export default class Preview extends React.Component {
 
                 </li>
             </Link>
-
+            </div>
 
         </React.Fragment >
     }

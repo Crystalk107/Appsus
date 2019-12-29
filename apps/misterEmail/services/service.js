@@ -26,20 +26,31 @@ let gEmails =  storageService.load('emails') || createEmails();
 
 function createEmails() {
     const emails = [
-        createEmail('Tal', 'Wassap?', 'Pick up! lorem ipsummmm eriatherig reoigearoigh go iherag orehg eagh regoihreagregoi herag oih', true, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Hello?', 'asdasdasd!', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'asd?', 'dfhdfh', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wassaasdasdp?', 'asfasfasf', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wasssadasdap?', 'asfasfasf', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wasadsfsdasdsap?', 'bfsafasf', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wassdfsdfsap?', 'hghgfjghfj', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wagdfgssap?', 'sadasdasd', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wahgfhssap?', 'dsgsdgsdg', false, false, 1551133930594, false, 'Ben'),
-        createEmail('Tal', 'Wajhjhssap?', 'hgjghfjghfj', false, false, 1551133930594, false, 'Ben')]
+        createEmail('Me', 'Thank You for Being Part of Our Community, CrysTal!',
+         'Whether we’re trudging through the snows of Northrend, fighting in the chill of Volskaya, crossing the frozen Fields of Slaughter, or exploring the cold expanse of space, it warms the heart to know we’ve been on such amazing adventures together.\n'+
+         'Thank you for a wonderful year and for making our community special. Your passion and creativity inspire us to create experiences we can all enjoy together, and we are looking forward to building even more for you to explore in the upcoming year!\n'+
+         'We couldn’t do it without you. Thank you again.\n'+
+         'Your Friends at Blizzard Entertainment', 
+         true, true, 1572133930290, false, 'Blizzard Entertainment'),
+        createEmail('Me', 'ScienceDaily: Latest Science News', 'ScienceDaily: Latest Science News.\n Cheers! Scientists take big step towards making the perfect head of beer', false, true, 1576133930290, false, 'ScienceDaily'),
+        createEmail('Me', 'Your free trial is over', 'Your Avocode free trial is over \n The free trial for talkabesa\'s team has ended. Please log in and \n purchase a subscription within 14 days to keep working on your design \n projects.', true, false, 1577133930290, false, 'Avocode'),
+        createEmail('Me', '[GitHub] A first-party GitHub OAuth application has been added to your account', 'Hey Crystalk107! \n A first-party GitHub OAuth application (GitHub Desktop) with repo, user, and workflow scopes was recently authorized to access your account. \n Visit https://github.com/settings/connections/applications/de0e3c7e9973e1c4dd77 for more information. \n To see this and other security events for your account, visit https://github.com/settings/security \n If you run into problems, please contact support by visiting https://github.com/contact \n Thanks, \n The GitHub Team ', false, false, 1577333930290, false, 'GitHub'),
+        createEmail('Me', 'Testing sending emails', 'Sent email to myself! Great!', true, false, 1577333930290, true, 'Me' ),
+        createEmail('Me', 'pax2 just went live on Twitch', 'Hey, crystalk! PAX2 is live! \n PAX WEST 2019 - HYDRA THEATRE \n Streaming Special Events \n Watch Now', false, false, 1577333930290, false, 'Twitch')]
     storageService.store('emails', emails)
+    console.log()
     return emails
 
 }
+
+function addEmail(to, subject, body) {
+    const newEmail = createEmail(to, subject, body, false, false, new Date().getTime(), true, 'me');
+    gEmails = [newEmail, ...gEmails]
+    storageService.store('emails', gEmails)
+    return newEmail
+}
+
+
 
 function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from) {
     return {
@@ -49,7 +60,7 @@ function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from)
         body,
         isRead,
         isStarred,
-        sentAt: new Date(sentAt).toString(),
+        sentAt: moment(new Date(sentAt)).fromNow(),
         isSent,
         from
     }
@@ -161,10 +172,12 @@ function getEmails(readFilter, isStarred, text, sortByName, isSent) {
 
 
         if (sortByName) {
+      
             
             var sortByName = emails.sort(function (email1, email2) {
-                return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+                return email1.from.toUpperCase() < email2.from.toUpperCase() ? -1 : (email1.from.toUpperCase() > email2.from.toUpperCase() ? 1 : 0)
             })
+            console.log (emails)
             emails = [...sortByName];
         } 
         
@@ -262,12 +275,6 @@ function getUnreadAmount() {
     return unreadEmails.length
 }
 
-function addEmail(to, subject, body) {
-    const newEmail = createEmail(to, subject, body, false, false, new Date().getTime(), true, 'talkabesa@gmail.com');
-    gEmails = [newEmail, ...gEmails]
-    storageService.store('emails', gEmails)
-    return newEmail
-}
 
 // return gMail.filter(mail => {  
 //     return book.title.includes(filterBy.name)
