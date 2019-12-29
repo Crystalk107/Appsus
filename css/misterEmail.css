@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Ubuntu-light;
+    src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
+
 html{
    
         width: 100%;
@@ -257,6 +262,7 @@ body {
         grid-template-columns: 80px 70px 120px auto 150px;
         grid-gap: 15px;
         width: 100%;
+        align-items: center;
       
     
     }
@@ -424,6 +430,74 @@ body {
     /* Details Page */
 
     .details-container {
+        
         white-space: pre-wrap;
+        align-items: center;
+        background-color: rgb(228, 216, 216);
+        min-width: 400px;
+        
+        margin: auto;
+        margin-top: 20px;
+        padding: 50px;
+        border-radius: 10px;
+        margin-right: 20px;
+        margin-left: 20px;
     }
 
+    .details-container .detailstext{
+        justify-content: center;
+        align-self: center;
+    }
+
+
+    .details-buttons{
+        display: flex;
+        flex-direction: row;
+        padding: 40px;
+        justify-content: flex-start;
+     
+    }
+
+    .detailsFrom{
+        font-family: Ubuntu-light;
+    }
+
+    .detailstext{
+        font-family: Ubuntu-regular;
+    }
+
+    .fa-arrow-circle-left{
+        font-size: 3rem;
+        color: rgb(88, 158, 66);
+        cursor: pointer;
+        transition: .3s;
+        margin-right: 20px;
+    }
+
+    .fa-arrow-circle-left:hover{
+        font-size: 3.5rem;
+    }
+
+    .fa-reply{
+        font-size: 3rem;
+        color: rgb(30, 115, 226);
+        cursor: pointer;
+        margin-right: 20px;
+        transition: .3s;
+    }
+
+    .fa-reply:hover{
+        font-size: 3.5rem;  
+    }
+
+    .fa-trash-alt{
+        font-size: 3rem;
+        color: rgb(226, 43, 30);
+        cursor: pointer;
+        transition: .3s
+       
+    }
+
+    .fa-trash-alt:hover{
+        font-size: 3.5rem;  
+    }

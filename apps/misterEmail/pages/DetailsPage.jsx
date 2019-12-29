@@ -47,7 +47,7 @@ export default class DetailsPage extends React.Component {
         (async () => {
 
             const { value: formValues } = await Swal.fire({
-                title: 'New Message',
+                title: 'Reply',
                 input: "textarea",
                 html:
                     `<input id="email" type="email" class="swal2-input" placeholder="To" value=${this.state.email.from}>` +
@@ -56,7 +56,8 @@ export default class DetailsPage extends React.Component {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Send',
+                confirmButtonText: 'Send <i class="fas fa-paper-plane"></i>',
+                cancelButtonText: 'Cancel <i class="fas fa-ban"></i>',
 
                 preConfirm: () => {
                     return [
@@ -90,16 +91,19 @@ export default class DetailsPage extends React.Component {
         if (!this.state.email) return <div className="loading">Loading...</div>
         else {
             return (<div className="details-container">
-                <ul>
-                    <li>{this.state.email.subject}</li>
-                    <li>{this.state.email.from}</li>
-                    <li>{this.state.email.body}</li>
-                </ul>
-                <div><button onClick={this.onReply}>Reply</button></div>
-                <div><button onClick={this.goBack}>Back</button></div>
-                <div><button onClick={this.onDelete}>Delete</button></div>
+                <ul className="clean-list detailstext">
+                    <li><h2>{this.state.email.subject}</h2></li>
+                    <li className="detailsFrom">{this.state.email.from}</li>
+                    <li><p>{this.state.email.body}</p></li>
+                </ul >
+                <div className="details-buttons">
+                <div><span onClick={this.goBack}><i className="fas fa-arrow-circle-left"></i></span></div>
+                <div><span onClick={this.onReply}><i className="fas fa-reply"></i></span></div>
+                <div><span onClick={this.onDelete}><i className="fas fa-trash-alt"></i></span></div>
+                </div>
             </div>)
         }
     }
 
 }
+
