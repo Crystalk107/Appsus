@@ -7,7 +7,7 @@ export default class MissKeepApp extends React.Component {
         notes: []
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         this.loadNotes();
 
@@ -15,47 +15,55 @@ export default class MissKeepApp extends React.Component {
     }
 
     loadNotes = () => {
-debugger
-        this.setState({ notes: service.getNots() },(()=>console.log(this.state.notes)))
+        this.setState({ notes: service.getNots() })
     }
 
-    onCreateTextNote=(typeNote,info)=>{
-        service.setNoteText(typeNote,info)
-        this.loadNotes()   
-
-          
-    }
-    onCreateImgNote =(typeNote,info)=>{
-        
-        service.setNoteImg(typeNote,info)
-        this.loadNotes()   
+    onCreateTextNote = (typeNote, info) => {
+        service.setNoteText(typeNote, info)
+        this.loadNotes()
 
 
     }
-    onCreateVideo=(typeNote,info)=>{
-        service.setNoteVideo(typeNote,info)
-        this.loadNotes()   
+    onCreateImgNote = (typeNote, info) => {
+
+        service.setNoteImg(typeNote, info)
+        this.loadNotes()
+
+
     }
-    onCreateToDo=(typeNote,info)=>{
+    onCreateVideo = (typeNote, info) => {
+        service.setNoteVideo(typeNote, info)
+        this.loadNotes()
+    }
+    onCreateToDo = (typeNote, info) => {
         let toDo = info[1].split(',')
-        service.setNoteTodo(typeNote,info[0],toDo)
-        this.loadNotes()   
+        service.setNoteTodo(typeNote, info[0], toDo)
+
+        this.loadNotes()
 
 
     }
-    onRemove=(noteId)=>{
+    onRemove = (noteId) => {
         service.removeNote(noteId)
-        this.loadNotes()  
+        this.loadNotes();
+    }
+    onChangeBackGroundColorNote=(color,noteId)=>{
+      
+
+
+        service.BackGroundColorNote(noteId,color)
+        this.loadNotes();
+
     }
 
-    
+
 
     render() {
         return <div className="container-cmps">
             <NoteAdd onCreateText={this.onCreateTextNote} onCreateImgNote={this.onCreateImgNote}
-             onCreateVideo={this.onCreateVideo} onCreateToDo={this.onCreateToDo}></NoteAdd>
-            <List notes={this.state.notes} onRemove={this.onRemove}></List>
-         
+                onCreateVideo={this.onCreateVideo} onCreateToDo={this.onCreateToDo}></NoteAdd>
+            <List onChangeBackGroundColorNote={this.onChangeBackGroundColorNote} notes={this.state.notes} onRemove={this.onRemove}></List>
+
 
         </div>
 
