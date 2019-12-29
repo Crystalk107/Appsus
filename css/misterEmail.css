@@ -1,3 +1,15 @@
+html{
+   
+        width: 100%;
+        height: 100%;
+    
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
 .star {
     color: black;
 }
@@ -194,7 +206,7 @@
     }
     
     .content-container{
-        width: 100vw;
+        width: 100%;
         display: flex;
         flex-direction: column;
         font-family: Ubuntu-regular;
@@ -204,7 +216,7 @@
 
     .emailList-container{
         width: 100%;
-        display: grid;
+        display: flex;
         flex-direction: column;
         justify-content: flex-start;
       
@@ -214,11 +226,13 @@
 
     .search-container{
        display: flex;
-       justify-content: center;
-       margin: 50px;
+       justify-content: space-between;
+       margin: 30px;
        flex-direction: column;
        align-items: center;
     }
+
+ 
 
    
 
@@ -238,15 +252,19 @@
        
         font-size: 1rem;
         border-bottom: 1px solid gray;
+        border-top: 1px solid gray;
         display: grid;
-        grid-template-columns: 80px 70px 1fr;
+        grid-template-columns: 80px 70px 120px auto 150px;
         grid-gap: 15px;
+        width: 100%;
       
     
     }
 
     .preview-container.unread{
         font-family: Ubuntu-bold;
+        color: black;
+       
         
     }
 
@@ -259,24 +277,25 @@
         display: grid;
         grid-column: 1 / 2;
     }
-    .from-container {
-        width: 300px;
-        grid-column: 3 / 4;
+    .from-container a{
+        color: black;
     }
 
-    .previewText-container {
+    .previewText-container a{
         flex-direction: flex-start;
-
-        
+        color: black;
+    
     }
 
     .relativeTime-container {
-        flex-direction: flex-end;
+     
+        grid-column: 5 / 6;
+      
      
        
     }
 
-    a li.textDetails { 
+    .textDetails { 
        display: flex;
        justify-content: space-between;
        text-align: left;
@@ -306,6 +325,7 @@
         border-radius: 40px;
         padding: 10px;
         
+        
     
     }
 
@@ -313,7 +333,7 @@
         color: rgb(223, 217, 217);
     }
     
-    .searchBox:hover > .searchInput {
+    .searchBox > .searchInput {
         width: 240px;
         padding: 0 6px;
     }
@@ -359,10 +379,51 @@
 
     /* Filter Dropdown */
 
-    
+    .readFilterSelector{
+        color: white;
+        background-color: rgb(14, 77, 148);
+        border-radius: 10px;
+        font-family: Ubuntu-regular;
+        padding: 10px;
+    }
+
+    .readFilterSelector:focus{
+        outline: none;
+    }
+
+    /* sort Buttons */
+
+    .sortButton{
+        background-color: rgb(17, 109, 170);
+        color: white;
+        
+        border-radius: 10px;
+        padding: 10px;
+        font-family: Ubuntu-bold;
+        margin: 10px;
+        box-shadow: 5px 5px 5px black;
+        cursor: pointer;
+    }
+
+    .sortButton:focus{
+        outline: none;
+    }
+
+    .sortButton:{
+        top: 5;
+        left: 5;
+    }
+
+    .sort-container{
+        background-color: rgb(221, 213, 213);
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid gray;
+    }
 
     /* Details Page */
 
     .details-container {
         white-space: pre-wrap;
     }
+

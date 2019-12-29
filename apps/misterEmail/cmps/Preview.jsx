@@ -60,25 +60,28 @@ export default class Preview extends React.Component {
 
                     </div>
 
-            <Link to={`/email/${props.email.id}`} >
+          
                 
-                <li onClick={this.onEmailClick} className={props.email.isRead ? "read clean-list textDetails" : "unread clean-list textDetails"}>
+           {/* <div onClick={this.onEmailClick} className={props.email.isRead ? "read from-container" : "unread from-container"}> */}
        
-                    <div className="from-container">
+                    <div className="from-container" onClick={this.onEmailClick}><Link to={`/email/${props.email.id}`} >
                         {props.email.from}
+                        </Link>
                     </div>
-                    <div className="previewText-container">
-                        {props.email.subject} - {props.email.body.substring(0, 60 - props.email.subject.length)}...
+                    <div className="previewText-container" onClick={this.onEmailClick}>  <Link to={`/email/${props.email.id}`} >
+                       {props.email.subject} - {props.email.body.substring(0, 60 - props.email.subject.length)}...
+                       </Link>
                     </div>
-                    <div className="relativeTime-container">
-                       {props.email.sentAt}
-                    </div>
+                    <div className="relativeTime-container"> 
+                        {props.email.sentAt}
+                        
+                    {/* </div> */}
 
 
+        </div>
 
-
-                </li>
-            </Link>
+                 
+          
             </div>
 
         </React.Fragment >

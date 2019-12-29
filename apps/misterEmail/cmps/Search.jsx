@@ -36,28 +36,35 @@ export default class Search extends React.Component {
 
 
     render() {
-        return <div className="search-container">
+        return <div>
+        <div className="search-container">
             <div className="searchBox">
             <input className="searchInput" type="text" placeholder="Search within emails..." value={this.state.text}
                 onChange={this.changeInput} name="text"></input>
-                           <button class="searchButton" href="#">
-                           <i class="fas fa-search"></i>
+                           <button className="searchButton" href="#">
+                           <i className="fas fa-search"></i>
             </button>
+
+    
 </div>
 
-            <select className="readFilterSelector" onChange={this.onFilterChoice}>
+<select className="readFilterSelector" onChange={this.onFilterChoice}>
                 <option className="readFilterSelector" value="all">All</option>
                 <option className="readFilterSelector" value="read">Read</option>
                 <option className="readFilterSelector" value="unread">Unread</option>
             </select>
+           
 
-            <div>
-                <span>Sort By: </span>
-                <button  className="sortButton" value="name" onClick={this.onSortEmails}>Name </button>
-                <button   className="sortButton" value="date" onClick={this.onSortEmails} >Date</button>
+     
         </div >
 
-        </div >
+<div className="sort-container">
+
+<button  className="sortButton" value="name" onClick={this.onSortEmails}>Name </button>
+<button   className="sortButton" value="date" onClick={this.onSortEmails} >Date</button>
+</div >
+</div>
+
     }
 
 
