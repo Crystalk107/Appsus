@@ -4,32 +4,39 @@ export default class DynamicComponent extends React.Component {
     state = {
         componentName: ''
     }
-  
 
-    componentWillMount() { 
+
+    componentWillMount() {
         this.setComponent()
     }
+   
 
     getComponent() {
-
         return mapDynamicComponents[this.state.componentName]
     }
 
 
     setComponent = (ev) => {
-        debugger
+
         const { props } = this
-        console.log(props)
         this.setState({ componentName: props.note.typeNote })
+
+        
     }
 
 
     render() {
-        const { props } = this
-        const Cmp = this.getComponent();
 
+    
+        const { props } = this
+
+        const Cmp = this.getComponent();
         return <React.Fragment>
-            <Cmp onRemove={props.onRemove} note={props.note}></Cmp>
+
+            <Cmp 
+            // setComponent={this.setComponent}
+             onRemove={props.onRemove} note={props.note}
+              onChangeBackGroundColorNote={props.onChangeBackGroundColorNote}></Cmp>
         </React.Fragment>
 
     }

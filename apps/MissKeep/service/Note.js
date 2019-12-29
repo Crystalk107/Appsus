@@ -8,5 +8,8 @@ export default class Note {
         this.info = info
         this.isPinned = false
         this.id = getRandomID()
+        this.backgroundColor = 'rgba(0, 0, 0, 0.156)'
+
+     
     }
 }

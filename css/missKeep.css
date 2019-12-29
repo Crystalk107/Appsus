@@ -61,7 +61,6 @@
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
     width: 321px;
     border-radius: 8%;
-    background-color: rgba(0, 0, 0, 0.156);
 }
 
 .note-container {
@@ -87,6 +86,7 @@
     background-color: rgba(0, 0, 0, 0.156);
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.326);
     border-radius: 8%;
+    flex-direction: column;
 }
 
 .noteTodos-container {
@@ -106,9 +106,86 @@
 .underLine {
     text-decoration: underline;
 }
-.editor{
+
+.editor {
     height: 40px;
     margin: 0;
     border-radius: 8%;
+    margin-left: 30px;
+    font-size: 25px;
+    margin-top: 12px;
+}
+
+.editor-video {
+    height: 40px;
+    margin: 0;
+    border-radius: 8%;
+    margin-left: 30px;
+    font-size: 25px;
+    width: 420px;
+    margin-top: 28px;
+}
+
+#colorIcon-img {
+    margin-left: 30px;
+}
+
+/* .trash{
+    width: auto;
+} */
+
+.lime {
+    background-color: lime;
+}
+
+.burlywood {
+    background-color: burlywood;
+}
+
+.darkgray {
+    background-color: darkgray;
+}
+
+.darkslategrey {
+    background-color: darkslategrey;
+}
+
+.deeppink {
+    background-color: deeppink;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.colorBox-container>* {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.colorBox-container {
+    width: auto;
+    height: auto;
+    display: flex;
+    border-radius: 25%;
+}
+
+.none {
+    display: none;
+}
+
+.brush {
+    margin-top: 12px
+}
+
+.brushTodo {
+    font-size: 23px;
+}
+
+@media (min-width:560) {
+    body * {
+        width: 100%;
+    }
 
 }

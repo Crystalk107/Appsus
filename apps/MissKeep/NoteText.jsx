@@ -1,9 +1,12 @@
-
+import ColorBox from './ColorBox.jsx'
 export default class NoteText extends React.Component {
 
     state = {
 
-        height: '300px'
+        height: '300px',
+        isOpen: false
+
+
 
     }
 
@@ -22,12 +25,20 @@ export default class NoteText extends React.Component {
 
 
     }
-    onRemove = (id) => {
+    onRemove = (ev) => {
+        ev.stopPropagation()
         const { props } = this
         props.onRemove(props.note.id)
+    }
 
-
-        // props.onRemove(id)
+    backgroundColor = (backgroundcolor) => {
+        console.log(backgroundcolor)
+        const { props } = this
+        props.onChangeBackGroundColorNote(backgroundcolor, props.note.id)
+        this.setState({ isOpen: false })
+    }
+    OnboxColorIcon = () => {
+        this.setState({ isOpen: true })
     }
 
 
@@ -35,15 +46,25 @@ export default class NoteText extends React.Component {
 
 
     render() {
+
+
         const { props } = this;
-        return <div className="NoteTx-container flex">
 
-            <div id={props.note.info.txt} style={{ height: this.state.height }} className="textNote-container flex">
+
+        return <div>
+
+            <div id={props.note.info.txt} style={{ height: this.state.height, backgroundColor: this.props.note.backgroundColor }} className="textNote-container flex">
                 {props.note.info.txt}
-                <div onClick={this.onRemove} className="editor" >
-                    <i className="far fa-trash-alt fa-1x"></i></div>
-
+                <div className="flex">
+                    <div onClick={this.onRemove} className="editor" >
+                        <i className="far fa-trash-alt fa-1x"></i></div>
+                    <div onClick={this.OnboxColorIcon}>
+                        <i  className="fas fa-paint-brush brush" id="colorIcon-img" ></i>
+                    </div>
+                </div>
             </div>
+            <ColorBox isOpen={this.state.isOpen} backgroundColor={this.backgroundColor}></ColorBox>
+
 
 
         </div>
