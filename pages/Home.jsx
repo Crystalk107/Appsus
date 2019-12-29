@@ -3,11 +3,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <section className="home-container">
-                <h1>Appsus - Homepage</h1>
+                <h1><img src="../img/logowhitebg.png"></img></h1>
                 <ul className="homeApps-container clean-list">
-                    <li>misterEmail<img src="../img/emailLogo.png"></img></li>
-                    <li>missKeep<img src="../img/noteLogo.png"></img></li>
-                    <li>missBook<img src="../img/booksLogo.png"></img></li>
+                    <li>MisterEmail<img src="../img/emailLogo.png"></img></li>
+                    <li>MissKeep<img src="../img/noteLogo.png"></img></li>
+                    <li>MissBook<img src="../img/booksLogo.png"></img></li>
                 </ul>
             </section>
         )
