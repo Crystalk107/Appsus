@@ -8,7 +8,7 @@ export default function NavBar(props) {
             <li><NavLink className="link-style nav-link" activeClassName="active" to='/msBooks'><i className="fas fa-book"></i> Books</NavLink></li>  
         </ul>
   
-        <img className="nav-logo" src="../img/logo.png" height="60" width="150"></img>
+        <img className="nav-logo" src="./img/logo.png" height="60" width="150"></img>
     
     </nav>
 }
