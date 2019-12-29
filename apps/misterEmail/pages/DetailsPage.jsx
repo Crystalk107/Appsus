@@ -99,7 +99,7 @@ export default class DetailsPage extends React.Component {
                 <div className="details-buttons">
                 <div><span onClick={this.goBack}><i className="fas fa-arrow-circle-left"></i></span></div>
                 <div><span onClick={this.onReply}><i className="fas fa-reply"></i></span></div>
-                <div><span onClick={this.onDelete}><i className="fas fa-trash-alt"></i></span></div>
+                <div><span className="deleteEmailDetails" onClick={this.onDelete}><i className="fas fa-trash-alt"></i></span></div>
                 </div>
             </div>)
         }

@@ -490,7 +490,7 @@ body {
         font-size: 3.5rem;  
     }
 
-    .fa-trash-alt{
+    .deleteEmailDetails{
         font-size: 3rem;
         color: rgb(226, 43, 30);
         cursor: pointer;
@@ -498,6 +498,6 @@ body {
        
     }
 
-    .fa-trash-alt:hover{
+    .deleteEmailDetails:hover{
         font-size: 3.5rem;  
     }
