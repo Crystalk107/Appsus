@@ -46,7 +46,7 @@ export default class SideBar extends React.Component {
         return (
             <div className="email-sidebar">
             <ul className="sidebar-itemlist clean-list" >
-                <li className="cat-link composeCat" onClick={this.onSelectCompose} ><i className="far fa-paper-plane sidebar-compose"></i><span className="sidebar-text">Compose</span></li>
+                <li className="cat-link composeCat" onClick={this.onSelectCompose} ><i className="fas fa-envelope sidebar-compose"></i><span className="sidebar-text">Compose</span></li>
                 <li className="cat-link inboxCat active" onClick={this.onSelectInbox}><i className="fas fa-inbox sidebar-inbox"></i><span className="sidebar-text">Inbox {(this.props.unread > 0) && ("(unread " + this.props.unread + ")")}</span></li>
                 <li className="cat-link starredCat" onClick={this.onSelectStarred} ><i className="fas fa-star sidebar-star"></i><span className="sidebar-text">Starred</span></li>
                 <li className="cat-link sentCat" onClick={this.onSelectSent}><i className="far fa-share-square sidebar-sent" ></i><span className="sidebar-text">Sent</span></li>
