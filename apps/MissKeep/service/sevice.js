@@ -78,7 +78,7 @@ function setNoteTodo(type, label, txts) {
     storageService.store('note', gNote)
 }
 function removeNote(noteid) {
-    debugger;
+
     let note = gNote.filter(note => (noteid !== note.id))
     gNote = [...note]
     storageService.store('note', gNote)
@@ -95,7 +95,7 @@ function BackGroundColorNote(noteId, color) {
     console.log(noteNewBackgroundColor)
 
     let notes = (gNote.map(note => {
-        debugger
+    
         if (noteId !== note.id) {
             return note
         } else return noteNewBackgroundColor
