@@ -69,7 +69,7 @@ export default class EmailApp extends React.Component {
         this.setState({ isSent: false })
         this.setState({ isStarred: true })
         let starredEmails = service.getStarredEmails(this.state.emails);
-        console.log(starredEmails)
+      
         this.setState({ emails: starredEmails }, this.loadEmails)
 
 

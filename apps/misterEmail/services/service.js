@@ -38,7 +38,7 @@ function createEmails() {
         createEmail('Me', 'Testing sending emails', 'Sent email to myself! Great!', true, false, 1577333930290, true, 'Me' ),
         createEmail('Me', 'pax2 just went live on Twitch', 'Hey, crystalk! PAX2 is live! \n PAX WEST 2019 - HYDRA THEATRE \n Streaming Special Events \n Watch Now', false, false, 1577333930290, false, 'Twitch')]
     storageService.store('emails', emails)
-    console.log()
+   
     return emails
 
 }
@@ -177,7 +177,7 @@ function getEmails(readFilter, isStarred, text, sortByName, isSent) {
             var sortByName = emails.sort(function (email1, email2) {
                 return email1.from.toUpperCase() < email2.from.toUpperCase() ? -1 : (email1.from.toUpperCase() > email2.from.toUpperCase() ? 1 : 0)
             })
-            console.log (emails)
+         
             emails = [...sortByName];
         } 
         
@@ -259,7 +259,7 @@ function toggleStarById(emailId) {
 
 function getEmailById(emailId) {
     let email = gEmails.find((email) => email.id === emailId);
-    console.log(email)
+   
     return Promise.resolve(email);
 }
 
