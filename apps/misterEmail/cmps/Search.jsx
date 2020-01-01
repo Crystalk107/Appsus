@@ -60,7 +60,7 @@ export default class Search extends React.Component {
 
 <div className="sort-container">
 
-<button  className="sortButton" value="name" onClick={this.onSortEmails}>Name </button>
+<button  className="sortButton" value="name" onClick={this.onSortEmails}>Subject </button>
 <button   className="sortButton" value="date" onClick={this.onSortEmails} >Date</button>
 </div >
 </div>

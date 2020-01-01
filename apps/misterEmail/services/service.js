@@ -53,6 +53,9 @@ function addEmail(to, subject, body) {
 
 
 function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from) {
+    let currTime = new Date().getTime()+1;
+    sentAt = Number(sentAt);
+    console.log (currTime, sentAt)
     return {
         id: getRandomID(),
         to,
@@ -60,7 +63,7 @@ function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from)
         body,
         isRead,
         isStarred,
-        sentAt: moment(new Date(sentAt)).fromNow(),
+        sentAt:  sentAt,
         isSent,
         from
     }
@@ -69,17 +72,27 @@ function createEmail(to, subject, body, isRead, isStarred, sentAt, isSent, from)
 
 
 function sortBy(sortBy, currEmails) {
-    if (sortBy) {
-        var copyArray = [...currEmails];
-        var sortByName = copyArray.sort(function (email1, email2) {
+    if (sortBy === 'name') {
+        var copyOfEmails = [...currEmails];
+        var sortedBy = copyOfEmails.sort(function (email1, email2) {
             return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
         })
-    } return [...sortByName]
+    } 
+    else {
+        debugger;
+            var copyOfEmails = [...currEmails];
+            var sortedBy = copyOfEmails.sort(function (email1, email2) {
+                return email1.sentAt.toUpperCase() - email2.sentAt.toUpperCase() ? -1 : (email1.sentAt.toUpperCase() - email2.sentAt.toUpperCase() ? 1 : 0)
+            })
+        }
+    
+    return [...sortedBy] 
+
 }
 
   
 
-function getEmails(readFilter, isStarred, text, sortByName, isSent) {
+function getEmails(readFilter, isStarred, text, sortByName, isSent, sortByDate) {
     let emails = [];
     
 
@@ -174,15 +187,38 @@ function getEmails(readFilter, isStarred, text, sortByName, isSent) {
         if (sortByName) {
       
             
-            var sortByName = emails.sort(function (email1, email2) {
-                return email1.from.toUpperCase() < email2.from.toUpperCase() ? -1 : (email1.from.toUpperCase() > email2.from.toUpperCase() ? 1 : 0)
-            })
+            // var sortByName = emails.sort(function (email1, email2) {
+            //     return email1.from.toUpperCase() < email2.from.toUpperCase() ? -1 : (email1.from.toUpperCase() > email2.from.toUpperCase() ? 1 : 0)
+            // })   
+            emails = sortBy('name', emails);
          
-            emails = [...sortByName];
+          
         } 
+
+        if (sortByDate) {
+            emails = sortBy('date', emails);  
+        }
         
 
     return Promise.resolve(emails)
+}
+
+function sortBy(sortBy, currEmails) {
+    if (sortBy === 'name') {
+        var copyOfEmails = [...currEmails];
+        var sortedBy = copyOfEmails.sort(function (email1, email2) {
+            return email1.subject.toUpperCase() < email2.subject.toUpperCase() ? -1 : (email1.subject.toUpperCase() > email2.subject.toUpperCase() ? 1 : 0)
+        })
+    } 
+    else {
+            var copyOfEmails = [...currEmails];
+            var sortedBy = copyOfEmails.sort(function (email1, email2) {
+                return email2.sentAt - email1.sentAt 
+            })
+        }
+    
+    return [...sortedBy] 
+
 }
 
 function getSentEmails() {

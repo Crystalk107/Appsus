@@ -33,6 +33,8 @@ export default class Preview extends React.Component {
         props.onDelete(props.email)
     }
 
+    
+
     render() {
         // const props = this.props;
         const { props } = this;
@@ -73,7 +75,7 @@ export default class Preview extends React.Component {
                        </Link>
                     </div>
                     <div className="relativeTime-container"> 
-                        {props.email.sentAt}
+                    {moment(new Date(props.email.sentAt)).fromNow()}
                         
                     {/* </div> */}
 

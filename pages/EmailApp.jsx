@@ -29,7 +29,7 @@ export default class EmailApp extends React.Component {
     loadEmails = () => {
 
 
-        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName, this.state.isSent).then(emails => {
+        service.getEmails(this.state.readFilter, this.state.isStarred, this.state.text, this.state.sortByName, this.state.isSent, this.state.sortByDate).then(emails => {
             this.setState({ emails })
         })
 
@@ -98,8 +98,14 @@ export default class EmailApp extends React.Component {
     }
 
     onSort = (sortBy) => {
-
-        this.setState({ sortByName: true }, this.loadEmails)
+        if (sortBy === 'name') {
+            this.setState({ sortByName: true, sortByDate: false}, this.loadEmails)
+           
+        }
+        else {
+            this.setState({sortByDate: true, sortByName: false}, this.loadEmails)
+            
+        }
     }
 
     onSelectSent = () => {
