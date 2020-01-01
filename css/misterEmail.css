@@ -377,10 +377,10 @@ body {
     outline: none;
 }
 
-.sortButton: {
+/* .sortButton: {
     top: 5;
     left: 5;
-}
+} */
 
 .sort-container {
     background-color: rgb(221, 213, 213);
@@ -392,16 +392,17 @@ body {
 /* Details Page */
 
 .details-container {
+
     white-space: pre-wrap;
     align-items: center;
     background-color: rgb(228, 216, 216);
     min-width: 400px;
-    margin: auto;
-    margin-top: 20px;
     padding: 50px;
     border-radius: 10px;
     margin-right: 20px;
     margin-left: 20px;
+    margin-top: 150px;
+    position: fixed;
 }
 
 .details-container .detailstext {
