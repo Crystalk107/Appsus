@@ -4,7 +4,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <section className="home-container">
-                <h1><img src="./img/logowhitebg.png"></img></h1>
+                <img src="./img/logowhitebg.png"></img>
                 <ul className="homeApps-container clean-list">
                     <li> MisterEmail<Link to='/email' ><img src="./img/emailLogo.png"></img></Link></li>
                     <li>MissKeep<Link to='/MissKeepApp' ><img src="./img/noteLogo.png"></img></Link></li>
